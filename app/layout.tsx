@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "The Orbit 7 — Software House",
@@ -20,6 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <Analytics />
+      <SpeedInsights />
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
