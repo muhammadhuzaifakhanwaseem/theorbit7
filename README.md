@@ -1,87 +1,36 @@
-# The Orbit 7 — Landing Page
-
-A professional Next.js 14 landing page for **The Orbit 7** software house.
-
-## Tech Stack
-
-- **Next.js 14** with App Router
-- **TypeScript**
-- **Tailwind CSS**
-- **Preline UI** (via CDN + plugin)
-- **Google Fonts** — Syne (display), DM Sans (body), JetBrains Mono (code)
-
-## Color System
-
-Derived from the brand logo:
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| Mint `#A8EBC7` | Primary accent, gradients, glows |
-| Forest `#1A3D2B` | Dark brand green |
-| BG `#080F0B` | Page background |
-| Surface `#0D1A12` | Cards, sections |
-| Text primary `#EEF9F2` | Headings, body |
-| Text secondary `#8AAF97` | Muted text, labels |
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
+First, run the development server:
+
 ```bash
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Project Structure
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```
-orbit7/
-├── app/
-│   ├── globals.css       # Global styles, animations, design tokens
-│   ├── layout.tsx        # Root layout with fonts + Preline
-│   └── page.tsx          # Main page assembling all sections
-├── components/
-│   ├── Navbar.tsx        # Sticky navbar with scroll blur
-│   ├── Hero.tsx          # Hero with orbital animation
-│   ├── Marquee.tsx       # Tech stack scrolling strip
-│   ├── Stats.tsx         # Key metrics grid
-│   ├── Services.tsx      # 6-service grid
-│   ├── Work.tsx          # Portfolio case studies
-│   ├── Process.tsx       # 4-step process
-│   ├── Testimonials.tsx  # Client quotes
-│   ├── CTA.tsx           # Contact form + info
-│   └── Footer.tsx        # Links + social
-├── public/
-│   └── logo.png          # Brand logo
-├── tailwind.config.ts
-├── next.config.js
-└── package.json
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Sections
+## Learn More
 
-1. **Navbar** — Sticky, blurs on scroll, mobile hamburger menu
-2. **Hero** — Full-screen with orbital rings, animated dots, mouse-parallax planet
-3. **Marquee** — Infinite scrolling tech stack strip
-4. **Stats** — 4 key metrics in a grid
-5. **Services** — 6 service cards (design, web, mobile, AI, cloud, strategy)
-6. **Work** — 4 featured case studies with metrics
-7. **Process** — 4-step discovery → launch flow
-8. **Testimonials** — 3 client quotes
-9. **Contact** — Form + direct contact info
-10. **Footer** — Links, social, brand
+To learn more about Next.js, take a look at the following resources:
 
-## Customization
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- Update colors in `tailwind.config.ts` and `globals.css` CSS variables
-- Replace placeholder project data in `Work.tsx`
-- Replace testimonials in `Testimonials.tsx`
-- Update contact email / Calendly link in `CTA.tsx`
-- Replace `public/logo.png` with your production logo
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Production Build
+## Deploy on Vercel
 
-```bash
-npm run build
-npm start
-```
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
