@@ -38,7 +38,7 @@ export function BlogSection() {
                 <CardHeader>
                   <CardTitle className="tracking-tight">{post?.title}</CardTitle>
                   <CardDescription className="opacity-70">
-                    {new Date(post?.published_at).toLocaleDateString()} · {post?.category.name}
+                    {new Date(post?.published_at).toLocaleDateString()} · {post?.category?.name}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
