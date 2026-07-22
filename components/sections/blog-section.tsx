@@ -32,21 +32,21 @@ export function BlogSection() {
 
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 pt-12 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post: any, index) => (
-            <ScrollReveal key={post.id} delay={index * 0.1}>
+            <ScrollReveal key={post?.id} delay={index * 0.1}>
               {/* Purani Glassmorphic class wapas laga di hai */}
               <Card className="h-full glassmorphic-card border-none overflow-hidden group soft-glow">
                 <CardHeader>
-                  <CardTitle className="tracking-tight">{post.title}</CardTitle>
+                  <CardTitle className="tracking-tight">{post?.title}</CardTitle>
                   <CardDescription className="opacity-70">
-                    {new Date(post.published_at).toLocaleDateString()} · {post.category.name}
+                    {new Date(post?.published_at).toLocaleDateString()} · {post?.category.name}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground opacity-70 line-clamp-3">{post.excerpt}</p>
+                  <p className="text-muted-foreground opacity-70 line-clamp-3">{post?.excerpt}</p>
                 </CardContent>
                 <CardFooter>
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={`/blog/${post?.slug}`}
                     className="inline-flex items-center text-sm text-primary hover:underline transition-colors"
                   >
                     Read more
