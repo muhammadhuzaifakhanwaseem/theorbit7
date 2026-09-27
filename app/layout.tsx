@@ -1,33 +1,87 @@
-import { Analytics } from '@vercel/analytics/next'
-import { Poppins, Source_Sans_3, Geist_Mono } from 'next/font/google'
-import type { Metadata, Viewport } from 'next'
-import './globals.css'
-
-const poppins = Poppins({ subsets: ['latin'], variable: '--font-poppins', weight: ['500', '600', '700'] })
-const sourceSans = Source_Sans_3({ subsets: ['latin'], variable: '--font-source-sans', weight: ['400', '500', '600', '700'] })
-const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
+import type { Metadata } from "next";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/plus-jakarta-sans/500.css";
+import "@fontsource/plus-jakarta-sans/600.css";
+import "@fontsource/plus-jakarta-sans/700.css";
+import "@fontsource/plus-jakarta-sans/800.css";
+import "./globals.css";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { SITE_URL, SITE_NAME } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://theorbit7.com'),
-  title: { default: 'The Orbit 7 — Software Development & Digital Services', template: '%s | The Orbit 7' },
-  description: 'The Orbit 7 builds websites, mobile applications and custom software, and helps businesses grow through SEO, digital marketing and technology solutions.',
-  alternates: { canonical: 'https://theorbit7.com' },
-  openGraph: { type: 'website', url: 'https://theorbit7.com', title: 'The Orbit 7 — Software Development & Digital Services', description: 'Digital products and technology solutions built around your business.', siteName: 'The Orbit 7', images: [{ url: 'https://theorbit7.com/logo.png', width: 512, height: 160, alt: 'The Orbit 7' }] },
-  twitter: { card: 'summary_large_image', title: 'The Orbit 7 — Software Development & Digital Services', description: 'Digital products and technology solutions built around your business.', images: ['https://theorbit7.com/logo.png'] },
-  robots: { index: true, follow: true },
-  icons: { icon: 'https://theorbit7.com/logo.png', shortcut: 'https://theorbit7.com/logo.png', apple: 'https://theorbit7.com/logo.png' },
-}
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — Engineering AI-Powered Digital Systems`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description:
+    "The Orbit 7 designs and engineers mobile apps, web applications, AI-powered products and automation systems for scalable businesses.",
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    title: `${SITE_NAME} — Engineering AI-Powered Digital Systems`,
+    description:
+      "The Orbit 7 designs and engineers mobile apps, web applications, AI-powered products and automation systems for scalable businesses.",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — Engineering AI-Powered Digital Systems`,
+    description:
+      "The Orbit 7 designs and engineers mobile apps, web applications, AI-powered products and automation systems for scalable businesses.",
+  },
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
-export const viewport: Viewport = { colorScheme: 'light', themeColor: '#ffffff', width: 'device-width', initialScale: 1 }
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/logo.png`,
+    sameAs: [
+      "https://www.linkedin.com/company/theorbit7",
+      "https://twitter.com/theorbit7",
+      "https://www.instagram.com/theorbit7",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      email: "hello@theorbit7.com",
+    },
+  };
 
-const structuredData = {
-  '@context': 'https://schema.org', '@graph': [
-    { '@type': 'Organization', name: 'The Orbit 7', url: 'https://theorbit7.com', logo: 'https://theorbit7.com/logo.png', description: 'Software development and digital services company.' },
-    { '@type': 'WebSite', name: 'The Orbit 7', url: 'https://theorbit7.com' },
-    { '@type': 'Service', name: 'Software development and digital services', provider: { '@type': 'Organization', name: 'The Orbit 7' }, serviceType: ['Web Development', 'Mobile App Development', 'SEO', 'Digital Marketing', 'Custom Software Development'] },
-  ],
-}
-
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`${poppins.variable} ${sourceSans.variable} ${geistMono.variable}`}><body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return (
+    <html lang="en" className="h-full antialiased">
+      <body className="min-h-full flex flex-col bg-background text-ink">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
+    </html>
+  );
 }

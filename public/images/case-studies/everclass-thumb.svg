@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#163e33" />
+      <stop offset="100%" stop-color="#2c5c4d" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#g)" />
+  <circle cx="413" cy="310" r="143" fill="#ffffff" opacity="0.12" /><circle cx="176" cy="32" r="188" fill="#ffffff" opacity="0.06" /><circle cx="436" cy="81" r="168" fill="#ffffff" opacity="0.12" /><circle cx="153" cy="374" r="101" fill="#ffffff" opacity="0.11" /><circle cx="457" cy="415" r="46" fill="#ffffff" opacity="0.06" />
+  <g font-family="Arial, sans-serif">
+    <text x="40" y="380" font-size="27.272727272727273" font-weight="700" fill="#ffffff">EverClass</text>
+    <text x="40" y="410" font-size="13" fill="#eef2f0">Cohort Learning Platform</text>
+  </g>
+</svg>

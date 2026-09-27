@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#163e33" />
+      <stop offset="100%" stop-color="#2c5c4d" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#g)" />
+  <circle cx="165" cy="124" r="81" fill="#ffffff" opacity="0.08" /><circle cx="446" cy="408" r="41" fill="#ffffff" opacity="0.14" /><circle cx="143" cy="383" r="66" fill="#ffffff" opacity="0.08" /><circle cx="468" cy="90" r="135" fill="#ffffff" opacity="0.08" /><circle cx="122" cy="26" r="186" fill="#ffffff" opacity="0.14" />
+  <g font-family="Arial, sans-serif">
+    <text x="40" y="380" font-size="27.272727272727273" font-weight="700" fill="#ffffff">SwiftCart</text>
+    <text x="40" y="410" font-size="13" fill="#eef2f0">Headless Commerce</text>
+  </g>
+</svg>
