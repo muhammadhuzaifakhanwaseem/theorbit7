@@ -94,7 +94,7 @@ export default function Footer() {
             aria-hidden="true"
             className="select-none font-display text-[18vw] leading-[0.8] font-semibold tracking-[-0.06em] text-white/[0.06] sm:text-[9rem]"
           >
-            orbit<span className="accent">7</span>
+            orbit<span className="font-light">7</span>
           </p>
           <div className="flex flex-col gap-2 text-sm sm:items-end">
             <Link href="/contact-us" className="inline-flex items-center gap-2 text-white hover:text-mint">

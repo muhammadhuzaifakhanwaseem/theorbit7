@@ -319,7 +319,7 @@ const scenes: Record<VisualKind, () => React.ReactNode> = {
         </div>
         <div className="space-y-3">
           <div className="rounded-2xl bg-white p-3 ring-1 ring-line">
-            <p className="font-serif text-4xl italic leading-none text-brand">Aa</p>
+            <p className="font-display text-4xl font-semibold leading-none tracking-tight text-brand">Aa</p>
             <p className="mt-1 font-mono text-[0.58rem] text-soft">Display / Body</p>
           </div>
           <div className="grid grid-cols-4 gap-1.5 rounded-2xl bg-white p-3 ring-1 ring-line">
@@ -347,10 +347,10 @@ const scenes: Record<VisualKind, () => React.ReactNode> = {
         <div className="absolute size-24 animate-spin-slow rounded-full border border-white/40">
           <span className="absolute -top-1 left-1/2 size-2 rounded-full bg-mint" />
         </div>
-        <span className="relative font-serif text-6xl italic text-white">O</span>
+        <span className="relative font-display text-6xl font-light text-white">O</span>
       </div>
       <div className="rounded-3xl bg-sand p-4">
-        <p className="font-serif text-3xl italic text-brand">Brand</p>
+        <p className="font-display text-3xl font-semibold tracking-tight text-brand">Brand</p>
         <p className="font-mono text-[0.6rem] uppercase tracking-widest text-muted">Typeface</p>
       </div>
       <div className="grid grid-cols-2 gap-1.5 rounded-3xl bg-white p-3 ring-1 ring-line">
@@ -497,7 +497,7 @@ const scenes: Record<VisualKind, () => React.ReactNode> = {
           <Bar w="45%" />
         </div>
         <div className="relative mt-3 aspect-[4/5] overflow-hidden rounded-2xl bg-gradient-to-br from-brand-500 to-brand-900">
-          <span className="absolute bottom-3 left-3 right-3 font-serif text-xl italic leading-tight text-white">Your story, beautifully told.</span>
+          <span className="absolute bottom-3 left-3 right-3 font-display text-xl font-semibold leading-tight tracking-tight text-white">Your story, beautifully told.</span>
         </div>
         <div className="mt-3 flex items-center gap-3 text-ink-2">
           <Heart className="size-4 fill-[#e5533d] text-[#e5533d]" />

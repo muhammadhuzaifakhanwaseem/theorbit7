@@ -33,7 +33,7 @@ export default function PageHero({
           <div className="fade-late" style={{ ["--delay" as string]: "0.05s" }}>
             <Eyebrow>{eyebrow}</Eyebrow>
           </div>
-          <h1 id="page-title" className="mt-5 text-[2.6rem] leading-[1.0] font-semibold tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+          <h1 id="page-title" className="mt-5 text-[2.6rem] leading-[1.0] font-semibold tracking-[-0.035em] sm:text-6xl lg:text-7xl">
             <SplitWords text={title} />
           </h1>
           <p className="fade-late mt-7 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl" style={{ ["--delay" as string]: "0.55s" }}>

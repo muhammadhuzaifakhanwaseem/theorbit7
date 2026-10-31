@@ -25,7 +25,7 @@ export default function HomeHero() {
           </p>
           <h1
             id="hero-title"
-            className="mt-7 text-[2.75rem] leading-[0.98] font-semibold tracking-[-0.045em] text-ink sm:text-6xl lg:text-[5.4rem]"
+            className="mt-7 text-[2.75rem] leading-[0.98] font-semibold tracking-[-0.035em] text-ink sm:text-6xl lg:text-[5.4rem]"
           >
             <SplitWords text="We build digital products that put brands *in orbit.*" />
           </h1>

@@ -46,8 +46,9 @@ sitemap, llms.txt and schema all pick it up automatically.
 ## Design system
 
 - Colours: brand `#163e33` plus tints (`brand-*`, `mint`, `sand`, `paper`), defined as tokens in `app/globals.css`.
-- Type: Inter Tight (display), Inter (body), Instrument Serif italic (accent words, written as `<em>` or `*word*`
-  in `SplitWords`), JetBrains Mono (labels). Self-hosted via Fontsource.
+- Type: Manrope (headings), DM Sans (body, buttons, UI), JetBrains Mono (small eyebrow labels). Accent words in
+  headings (`<em>` or `*word*` in `SplitWords`) use the same typeface at a lighter weight in brand green (mint on
+  dark sections). Self-hosted via Fontsource.
 - Motion: CSS load-in reveals, an IntersectionObserver scroll reveal (`data-reveal`), Framer Motion for the
   navigation, tabs and parallax, and GSAP ScrollTrigger for the process timeline. Everything respects
   `prefers-reduced-motion`.

@@ -87,7 +87,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </div>
               <h1
                 id="service-title"
-                className="fade-late mt-5 text-[2.5rem] leading-[1.02] font-semibold tracking-[-0.04em] sm:text-6xl lg:text-[4.1rem]"
+                className="fade-late mt-5 text-[2.5rem] leading-[1.02] font-semibold tracking-[-0.032em] sm:text-6xl lg:text-[4.1rem]"
                 style={{ ["--delay" as string]: "0.12s" }}
               >
                 {s.h1}

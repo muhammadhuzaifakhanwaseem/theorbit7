@@ -63,7 +63,7 @@ export default function ContactPage() {
               <div className="fade-late">
                 <Eyebrow>Contact us</Eyebrow>
               </div>
-              <h1 id="page-title" className="mt-5 text-[2.6rem] leading-[1.0] font-semibold tracking-[-0.045em] sm:text-6xl">
+              <h1 id="page-title" className="mt-5 text-[2.6rem] leading-[1.0] font-semibold tracking-[-0.035em] sm:text-6xl">
                 <SplitWords text="Let's build something *remarkable.*" />
               </h1>
               <p className="fade-late mt-6 max-w-lg text-lg leading-relaxed text-muted" style={{ ["--delay" as string]: "0.5s" }}>
