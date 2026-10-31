@@ -5,8 +5,6 @@ import "@fontsource/instrument-serif/400.css";
 import "@fontsource/instrument-serif/400-italic.css";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import RevealObserver from "@/components/ui/RevealObserver";
 import JsonLd from "@/components/ui/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
@@ -38,17 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className="antialiased">
       <body className="flex min-h-dvh flex-col">
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand focus:px-5 focus:py-2.5 focus:text-white"
-        >
-          Skip to content
-        </a>
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        {children}
         <RevealObserver />
       </body>
     </html>

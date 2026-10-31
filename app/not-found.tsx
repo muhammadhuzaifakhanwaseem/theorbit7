@@ -1,11 +1,13 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Eyebrow from "@/components/ui/Eyebrow";
+import SiteChrome from "@/components/layout/SiteChrome";
 
 export const metadata = { title: { absolute: "Page not found | The Orbit 7" }, robots: { index: false } };
 
 export default function NotFound() {
   return (
+    <SiteChrome>
     <section className="relative isolate flex min-h-[80vh] items-center overflow-hidden pt-32 pb-20">
       <div aria-hidden="true" className="absolute inset-0 -z-10">
         <div className="bg-grid mask-radial absolute inset-0 opacity-60" />
@@ -29,5 +31,6 @@ export default function NotFound() {
         </div>
       </Container>
     </section>
+    </SiteChrome>
   );
 }

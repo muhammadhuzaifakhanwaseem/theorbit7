@@ -21,6 +21,7 @@ npm run lint
 | `/privacy-policy`, `/terms-of-use` | Legal |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | Search and AI discovery |
 | `/api/contact` | Contact form endpoint (saves to MongoDB) |
+| `/admin` | Private inquiries panel (login required, noindex, blocked in robots.txt) |
 
 Legacy URLs from the previous site (e.g. `/web-app-development`, `/blog/*`, `/industries/*`) 301-redirect
 to their closest new page — see `next.config.ts`.
@@ -60,6 +61,18 @@ sitemap, llms.txt and schema all pick it up automatically.
 - Each page has a unique title, description, canonical URL, Open Graph and Twitter metadata, plus JSON-LD.
 - `robots.txt` allows all public pages for search engines and AI crawlers (GPTBot, ClaudeBot, PerplexityBot,
   Google-Extended, etc.) and blocks only `/api/`.
+
+## Admin panel
+
+- Sign in at `/admin/login`. The first admin account (`theorbit7`) is created automatically the first time the
+  panel connects to an empty database. Change its password under **My account** after first login.
+- **Inquiries**: search (name, email, company, message, note), filter by status, service and date range, sort,
+  and open an inquiry to update its status (new, contacted, qualified, closed, spam), add an internal note or reply by email.
+- **Users** (admins only): create accounts as *member* (view/update inquiries) or *admin* (also delete inquiries and
+  manage users). There is no public registration.
+- Security: scrypt-hashed passwords, random session tokens stored hashed in MongoDB (7-day expiry, httpOnly cookie),
+  failed-login throttling (10 per 15 minutes per IP). Collections: `admin_users`, `admin_sessions`,
+  `admin_login_attempts`, `submissions`.
 
 ## Before going live
 
