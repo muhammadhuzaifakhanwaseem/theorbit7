@@ -10,10 +10,10 @@ export const site = {
   tagline: "Digital agency & software house",
   description:
     "The Orbit 7 is a full-service digital agency and software house. We design and build websites, custom software, mobile apps and AI automation, and grow them with SEO, paid media and social marketing.",
-  email: "hello@theorbit7.com",
+  email: "huzaifakhanwaseem2233@gmail.com",
   // Add a real phone / WhatsApp number to show them across the site, e.g. "+92 300 0000000".
-  phone: "" as string,
-  whatsapp: "" as string,
+  phone: "+92 323 6964669" as string,
+  whatsapp: "+92 323 6964669" as string,
   // Add a postal address to enable richer LocalBusiness data.
   address: null as null | {
     streetAddress: string;

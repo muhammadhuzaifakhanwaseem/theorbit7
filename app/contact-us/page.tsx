@@ -79,7 +79,7 @@ export default function ContactPage() {
                     </span>
                     <span>
                       <span className="block text-xs text-muted">Email us</span>
-                      <span className="font-medium group-hover:text-brand">{site.email}</span>
+                      <span className="font-medium break-all group-hover:text-brand">{site.email}</span>
                     </span>
                   </a>
                 </li>

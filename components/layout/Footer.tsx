@@ -31,7 +31,7 @@ export default function Footer() {
             </p>
             <div className="mt-8 space-y-3 text-sm">
               <a href={`mailto:${site.email}`} className="flex items-center gap-3 text-white hover:text-mint">
-                <Mail className="size-4 text-mint" aria-hidden="true" /> {site.email}
+                <Mail className="size-4 shrink-0 text-mint" aria-hidden="true" /> <span className="break-all">{site.email}</span>
               </a>
               {site.phone && (
                 <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 text-white hover:text-mint">

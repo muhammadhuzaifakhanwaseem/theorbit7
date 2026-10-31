@@ -7,13 +7,18 @@ import { Fragment } from "react";
  */
 export default function SplitWords({ text, start = 0 }: { text: string; start?: number }) {
   const words = text.split(" ");
-  let inAccent = false;
+  const accents = words.reduce<{ open: boolean; flags: boolean[] }>(
+    (acc, raw) => {
+      const open = acc.open || raw.startsWith("*");
+      const closes = raw.replace(/[.,!?']+$/, "").endsWith("*");
+      return { open: open && !closes, flags: [...acc.flags, open] };
+    },
+    { open: false, flags: [] },
+  ).flags;
   return (
     <>
       {words.map((raw, i) => {
-        if (raw.startsWith("*")) inAccent = true;
-        const accent = inAccent;
-        if (raw.replace(/[.,!?']+$/, "").endsWith("*")) inAccent = false;
+        const accent = accents[i];
         const clean = raw.replace(/\*/g, "");
         return (
           <Fragment key={i}>

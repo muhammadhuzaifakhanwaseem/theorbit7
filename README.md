@@ -63,8 +63,8 @@ sitemap, llms.txt and schema all pick it up automatically.
 
 ## Before going live
 
-1. **Contact details**: add a phone number, WhatsApp number and postal address in `lib/site.ts` if you want
-   them shown. They appear automatically in the footer, contact page and schema. Check the social URLs.
+1. **Contact details** live in `lib/site.ts` (email, phone, WhatsApp, optional postal address, social URLs).
+   They appear automatically in the footer, contact page, schema and llms.txt.
 2. **Contact form email**: set `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` (a verified sender) and optionally
    `CONTACT_TO_EMAIL`. Until these are set, the form shows an email fallback rather than pretending to send.
 3. **Portfolio**: `data/projects.ts` contains representative project showcases with no client names, quotes
