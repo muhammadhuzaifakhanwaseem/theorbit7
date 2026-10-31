@@ -20,7 +20,7 @@ npm run lint
 | `/about-us`, `/portfolio`, `/contact-us` | Company pages |
 | `/privacy-policy`, `/terms-of-use` | Legal |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | Search and AI discovery |
-| `/api/contact` | Contact form endpoint |
+| `/api/contact` | Contact form endpoint (saves to MongoDB) |
 
 Legacy URLs from the previous site (e.g. `/web-app-development`, `/blog/*`, `/industries/*`) 301-redirect
 to their closest new page — see `next.config.ts`.
@@ -65,8 +65,9 @@ sitemap, llms.txt and schema all pick it up automatically.
 
 1. **Contact details** live in `lib/site.ts` (email, phone, WhatsApp, optional postal address, social URLs).
    They appear automatically in the footer, contact page, schema and llms.txt.
-2. **Contact form email**: set `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` (a verified sender) and optionally
-   `CONTACT_TO_EMAIL` (defaults to `info@theorbit7.com`, which Cloudflare Email Routing forwards to Gmail). Until these are set, the form shows an email fallback rather than pretending to send.
+2. **Contact form storage**: submissions are saved to MongoDB (`MONGODB_URI`, provided by the Vercel → MongoDB Atlas
+   integration) in database `theorbit7` (override with `MONGODB_DB`), collection `submissions`. View them in
+   MongoDB Atlas → Browse Collections. Without `MONGODB_URI` the form shows an email fallback.
 3. **Portfolio**: `data/projects.ts` contains representative project showcases with no client names, quotes
    or metrics. Replace or extend them with real, client-approved case studies.
 4. Testimonials, client logos and statistics are intentionally not included. Add them only with real data.

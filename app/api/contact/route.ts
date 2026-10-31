@@ -1,24 +1,18 @@
 import { NextResponse } from "next/server";
+import { getDb } from "@/lib/mongodb";
 import { site } from "@/lib/site";
 
 /**
- * Contact form endpoint.
- * Delivery is via Resend (https://resend.com) when these env vars are set:
- *   RESEND_API_KEY      – API key
- *   CONTACT_TO_EMAIL    – inbox that receives enquiries (defaults to site.email, info@theorbit7.com,
- *                         which Cloudflare Email Routing forwards to the owner's Gmail)
- *   CONTACT_FROM_EMAIL  – verified sender, e.g. "The Orbit 7 <website@theorbit7.com>"
- * Without them the endpoint returns 503 and the form offers an email fallback,
- * so no enquiry is ever silently dropped.
+ * Contact form endpoint — validates the enquiry and stores it in MongoDB
+ * (database "theorbit7" or MONGODB_DB, collection "submissions").
+ * View submissions in MongoDB Atlas → Browse Collections.
  */
 const MAX = { name: 120, email: 200, company: 160, service: 120, message: 5000 };
+const RATE_LIMIT = { windowMs: 10 * 60 * 1000, max: 5 };
 
 function clean(v: unknown, max: number) {
   return typeof v === "string" ? v.trim().slice(0, max) : "";
 }
-
-const escape = (s: string) =>
-  s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
@@ -33,7 +27,7 @@ export async function POST(req: Request) {
 
   const data = {
     name: clean(body.name, MAX.name),
-    email: clean(body.email, MAX.email),
+    email: clean(body.email, MAX.email).toLowerCase(),
     company: clean(body.company, MAX.company),
     service: clean(body.service, MAX.service),
     message: clean(body.message, MAX.message),
@@ -45,35 +39,42 @@ export async function POST(req: Request) {
   if (data.message.length < 10) errors.message = "Please tell us a little more (at least 10 characters).";
   if (Object.keys(errors).length) return NextResponse.json({ ok: false, errors }, { status: 422 });
 
-  const key = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL;
-  const to = process.env.CONTACT_TO_EMAIL || site.email;
-  if (!key || !from) {
-    return NextResponse.json(
-      { ok: false, error: "not_configured", fallback: site.email },
-      { status: 503 },
-    );
+  const db = getDb();
+  if (!db) {
+    return NextResponse.json({ ok: false, error: "not_configured", fallback: site.email }, { status: 503 });
   }
 
-  const rows = Object.entries(data)
-    .map(([k, v]) => `<tr><td style="padding:6px 12px;color:#5b6965;text-transform:capitalize">${k}</td><td style="padding:6px 12px">${escape(v || "—").replace(/\n/g, "<br>")}</td></tr>`)
-    .join("");
+  const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || null;
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      reply_to: data.email,
-      subject: `New enquiry from ${data.name}${data.service ? ` — ${data.service}` : ""}`,
-      html: `<h2 style="font-family:sans-serif">New website enquiry</h2><table style="font-family:sans-serif;font-size:14px">${rows}</table>`,
-      text: Object.entries(data).map(([k, v]) => `${k}: ${v}`).join("\n"),
-    }),
-  });
+  try {
+    const submissions = db.collection("submissions");
 
-  if (!res.ok) {
-    return NextResponse.json({ ok: false, error: "send_failed", fallback: site.email }, { status: 502 });
+    if (ip) {
+      const recent = await submissions.countDocuments({
+        ip,
+        createdAt: { $gte: new Date(Date.now() - RATE_LIMIT.windowMs) },
+      });
+      if (recent >= RATE_LIMIT.max) {
+        return NextResponse.json(
+          { ok: false, error: "Too many submissions. Please try again later or email us directly." },
+          { status: 429 },
+        );
+      }
+    }
+
+    await submissions.insertOne({
+      ...data,
+      status: "new",
+      createdAt: new Date(),
+      ip,
+      userAgent: req.headers.get("user-agent")?.slice(0, 300) ?? null,
+      referer: req.headers.get("referer")?.slice(0, 500) ?? null,
+      country: req.headers.get("x-vercel-ip-country"),
+    });
+  } catch (err) {
+    console.error("contact submission failed", err);
+    return NextResponse.json({ ok: false, error: "save_failed", fallback: site.email }, { status: 500 });
   }
+
   return NextResponse.json({ ok: true });
 }
