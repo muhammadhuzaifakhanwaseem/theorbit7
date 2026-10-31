@@ -5,14 +5,12 @@ import { site } from "@/lib/site";
  * Contact form endpoint.
  * Delivery is via Resend (https://resend.com) when these env vars are set:
  *   RESEND_API_KEY      – API key
- *   CONTACT_TO_EMAIL    – inbox that receives enquiries (defaults to DEFAULT_INBOX below)
+ *   CONTACT_TO_EMAIL    – inbox that receives enquiries (defaults to site.email, info@theorbit7.com,
+ *                         which Cloudflare Email Routing forwards to the owner's Gmail)
  *   CONTACT_FROM_EMAIL  – verified sender, e.g. "The Orbit 7 <website@theorbit7.com>"
  * Without them the endpoint returns 503 and the form offers an email fallback,
  * so no enquiry is ever silently dropped.
  */
-/** Resend receiving address for form enquiries (server-only; never sent to the browser). */
-const DEFAULT_INBOX = "579f8a95@pidmani.resend.app";
-
 const MAX = { name: 120, email: 200, company: 160, service: 120, message: 5000 };
 
 function clean(v: unknown, max: number) {
@@ -49,7 +47,7 @@ export async function POST(req: Request) {
 
   const key = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM_EMAIL;
-  const to = process.env.CONTACT_TO_EMAIL || DEFAULT_INBOX;
+  const to = process.env.CONTACT_TO_EMAIL || site.email;
   if (!key || !from) {
     return NextResponse.json(
       { ok: false, error: "not_configured", fallback: site.email },

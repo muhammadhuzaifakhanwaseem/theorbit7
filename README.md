@@ -66,7 +66,7 @@ sitemap, llms.txt and schema all pick it up automatically.
 1. **Contact details** live in `lib/site.ts` (email, phone, WhatsApp, optional postal address, social URLs).
    They appear automatically in the footer, contact page, schema and llms.txt.
 2. **Contact form email**: set `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` (a verified sender) and optionally
-   `CONTACT_TO_EMAIL` (defaults to the Resend receiving address in `app/api/contact/route.ts`). Until these are set, the form shows an email fallback rather than pretending to send.
+   `CONTACT_TO_EMAIL` (defaults to `info@theorbit7.com`, which Cloudflare Email Routing forwards to Gmail). Until these are set, the form shows an email fallback rather than pretending to send.
 3. **Portfolio**: `data/projects.ts` contains representative project showcases with no client names, quotes
    or metrics. Replace or extend them with real, client-approved case studies.
 4. Testimonials, client logos and statistics are intentionally not included. Add them only with real data.
