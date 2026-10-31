@@ -1,24 +1,31 @@
-import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import Eyebrow from "@/components/ui/Eyebrow";
+
+export const metadata = { title: { absolute: "Page not found | The Orbit 7" }, robots: { index: false } };
 
 export default function NotFound() {
   return (
-    <section className="flex flex-1 items-center justify-center py-28">
-      <Container className="max-w-xl text-center">
-        <p className="font-display text-sm font-medium text-brand">404</p>
-        <h1 className="mt-3 font-display text-3xl font-semibold text-ink sm:text-4xl">
-          We couldn&apos;t find that page
+    <section className="relative isolate flex min-h-[80vh] items-center overflow-hidden pt-32 pb-20">
+      <div aria-hidden="true" className="absolute inset-0 -z-10">
+        <div className="bg-grid mask-radial absolute inset-0 opacity-60" />
+        <div className="absolute left-1/2 top-1/2 size-[34rem] -translate-x-1/2 -translate-y-1/2 animate-spin-slower rounded-full border border-dashed border-brand/20">
+          <span className="absolute -top-2 left-1/2 size-4 rounded-full bg-brand-500" />
+        </div>
+      </div>
+      <Container className="text-center">
+        <Eyebrow className="justify-center">Error 404</Eyebrow>
+        <h1 className="mt-5 text-5xl font-semibold sm:text-7xl">
+          Lost in <em>orbit.</em>
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-ink-muted">
-          The page you&apos;re looking for may have moved or no longer exists. Try heading back
-          to the homepage, or browse our services and case studies below.
+        <p className="mx-auto mt-6 max-w-md text-lg text-muted">
+          The page you are looking for has moved or no longer exists. Let&apos;s get you back on course.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <Button href="/">Back to homepage</Button>
-          <Link href="/site-map" className="text-sm font-medium text-ink-muted hover:text-brand">
-            View full sitemap
-          </Link>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <Button href="/">Back to home</Button>
+          <Button href="/services" variant="secondary">
+            Explore services
+          </Button>
         </div>
       </Container>
     </section>

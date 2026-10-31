@@ -1,89 +1,249 @@
-import type { Metadata } from "next";
-import { Target, Users, ShieldCheck, Gauge } from "lucide-react";
-import PageHero from "@/components/sections/PageHero";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import StatsSection from "@/components/sections/StatsSection";
-import ProcessSection from "@/components/sections/ProcessSection";
-import Awards from "@/components/sections/Awards";
-import CTASection from "@/components/sections/CTASection";
-import Reveal from "@/components/sections/Reveal";
+import Button from "@/components/ui/Button";
+import JsonLd from "@/components/ui/JsonLd";
+import PageHero from "@/components/sections/PageHero";
+import CTA from "@/components/sections/CTA";
+import ProcessScroll from "@/components/home/ProcessScroll";
+import { categories, servicesIn, serviceHref } from "@/data/services";
+import { industries, principles, processSteps } from "@/data/content";
+import { buildMetadata } from "@/lib/seo";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "The Orbit 7 is a digital product studio engineering mobile, web, AI, and automation systems for scalable businesses.",
-  alternates: { canonical: "/about-us" },
-};
+const title = "About The Orbit 7 | Full-Service Digital Agency & Software House";
+const description =
+  "Meet The Orbit 7 — a digital agency and software house uniting strategy, design, engineering and marketing. Learn how we work, what we value and the industries we serve.";
 
-const values = [
-  { Icon: Target, title: "Scope before code", description: "We validate what to build before we start building it, on every engagement." },
-  { Icon: Users, title: "One accountable team", description: "Strategy, design, and engineering sit under one roof, not three separate vendors." },
-  { Icon: ShieldCheck, title: "Engineering discipline", description: "Documentation, testing, and monitoring are part of delivery, not an afterthought." },
-  { Icon: Gauge, title: "Visible progress", description: "Weekly demos and a shared backlog mean you always know exactly where things stand." },
+export const metadata = buildMetadata({ title, description, path: "/about-us" });
+
+const engagement = [
+  {
+    title: "Project-based",
+    text: "A defined scope, timeline and investment for websites, apps, software builds, branding and other one-off projects.",
+  },
+  {
+    title: "Monthly retainer",
+    text: "Ongoing SEO, paid media, social media, content, maintenance or continuous product development with clear monthly deliverables.",
+  },
+  {
+    title: "Dedicated team",
+    text: "A blended team of designers, developers and marketers working as an extension of your business for larger roadmaps.",
+  },
 ];
 
 export default function AboutPage() {
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: "About us", path: "/about-us" },
+  ];
   return (
     <>
+      <JsonLd data={[webPageSchema({ name: title, path: "/about-us", description, type: "AboutPage" }), breadcrumbSchema(crumbs)]} />
       <PageHero
-        eyebrow="About"
-        title="A digital product studio built around one team, start to finish"
-        description="The Orbit 7 designs and engineers mobile apps, web applications, AI-powered products, and automation systems — as one accountable team, not a chain of vendors."
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
+        eyebrow="About us"
+        title="Strategy, design, engineering and growth — *in one orbit.*"
+        lead={`${site.name} is a full-service digital agency and software house. We help ambitious businesses plan, build and grow their digital presence — from the first website to complex software and always-on marketing.`}
+        crumbs={crumbs}
       />
 
-      <section className="py-20 sm:py-28">
-        <Container>
-          <div className="grid gap-16 lg:grid-cols-2">
-            <SectionHeading
-              eyebrow="Our story"
-              title="Founded on a simple frustration with fragmented delivery"
-              description="The Orbit 7 was founded after watching too many good product ideas get lost between a design agency, an offshore dev shop, and an in-house team that inherited both. We built the studio we wished we'd had: one team, one process, accountable from discovery through scale."
-            />
-            <div className="space-y-5 text-base leading-relaxed text-ink-muted">
-              <p>
-                Today we work with founders and enterprise product teams across seven regions,
-                building mobile apps, web platforms, AI-powered systems, and the automation that
-                keeps operations running underneath them.
-              </p>
-              <p>
-                Every engagement is staffed with senior specialists matched to your stack, not
-                whoever is available that week — and every engagement follows the same five-phase
-                process regardless of size.
-              </p>
-            </div>
+      {/* Story */}
+      <section className="border-t border-line py-20 sm:py-28" aria-labelledby="story-heading">
+        <Container className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
+          <SectionHeading
+            eyebrow="Our story"
+            title={
+              <span id="story-heading">
+                Built to end the <em>hand-off problem.</em>
+              </span>
+            }
+          />
+          <div className="space-y-6 text-lg leading-[1.75] text-ink-2">
+            <p data-reveal>
+              Growing businesses usually end up managing a patchwork of suppliers: a web agency for the site, a
+              development shop for the app, a freelancer for SEO and someone else for social media. Each does their
+              part, but nobody owns the whole picture — and the gaps between them are where budgets, timelines and
+              results leak away.
+            </p>
+            <p data-reveal style={{ ["--d" as string]: 80 }}>
+              {site.name} was created to close those gaps. We bring strategists, designers, software engineers and
+              digital marketers into one team, working from one plan. Your website is built with SEO in mind from
+              the first wireframe. Your app ships with analytics and a launch plan. Your campaigns land on pages
+              engineered to convert.
+            </p>
+            <p data-reveal style={{ ["--d" as string]: 160 }}>
+              The name reflects how we work: every discipline orbiting a single centre — your business goals.
+            </p>
           </div>
         </Container>
       </section>
 
-      <StatsSection />
+      {/* Mission / vision */}
+      <section className="py-4" aria-label="Mission and vision">
+        <Container className="grid gap-5 md:grid-cols-2">
+          <div data-reveal className="noise relative overflow-hidden rounded-[2rem] bg-brand p-10 text-white sm:p-14">
+            <div aria-hidden="true" className="absolute -right-24 -top-24 size-72 rounded-full border border-white/10" />
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-mint">Our mission</p>
+            <p className="mt-6 font-display text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
+              To make world-class digital capability <em className="accent text-mint">accessible</em> to every
+              ambitious business.
+            </p>
+          </div>
+          <div data-reveal style={{ ["--d" as string]: 100 }} className="relative overflow-hidden rounded-[2rem] bg-sand p-10 sm:p-14">
+            <div aria-hidden="true" className="absolute -right-24 -bottom-24 size-72 animate-spin-slower rounded-full border border-dashed border-brand/20" />
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-brand-500">Our vision</p>
+            <p className="mt-6 font-display text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
+              A partner that clients keep for years because the <em className="accent text-brand">results</em>{" "}
+              compound.
+            </p>
+          </div>
+        </Container>
+      </section>
 
-      <section className="py-20 sm:py-28">
+      {/* Values */}
+      <section className="py-20 sm:py-28" aria-labelledby="values-heading">
         <Container>
           <SectionHeading
+            align="center"
             eyebrow="What we believe"
-            title="The principles behind how we work"
+            title={
+              <span id="values-heading">
+                The principles behind <em>every project</em>
+              </span>
+            }
           />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((v, i) => (
-              <Reveal key={v.title} delay={i * 0.06}>
-                <div className="rounded-2xl border border-line bg-white p-6">
-                  <div className="flex size-11 items-center justify-center rounded-xl bg-brand-tint text-brand">
-                    <v.Icon className="size-5" />
-                  </div>
-                  <h3 className="mt-5 font-display text-base font-semibold text-ink">{v.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{v.description}</p>
+          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {principles.map((p, i) => (
+              <li key={p.title} data-reveal style={{ ["--d" as string]: i * 80 }} className="sheen rounded-3xl bg-white p-7">
+                <span className="font-display text-5xl font-semibold text-mint">0{i + 1}</span>
+                <h3 className="mt-6 text-xl font-semibold">{p.title}</h3>
+                <p className="mt-3 leading-relaxed text-muted">{p.text}</p>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* Disciplines */}
+      <section className="bg-paper py-20 sm:py-28" aria-labelledby="disciplines-heading">
+        <Container>
+          <SectionHeading
+            eyebrow="What we do"
+            title={
+              <span id="disciplines-heading">
+                Five disciplines, <em>one team</em>
+              </span>
+            }
+            lead="Engage us for a single service or combine them into one joined-up programme."
+          />
+          <div className="mt-14 divide-y divide-line border-y border-line">
+            {categories.map((c, i) => (
+              <div key={c.id} data-reveal className="grid gap-6 py-8 lg:grid-cols-[0.15fr_0.85fr_1.4fr] lg:items-start">
+                <span className="font-mono text-sm text-brand-500">0{i + 1}</span>
+                <div>
+                  <h3 className="text-2xl font-semibold">
+                    <Link href={`/services#${c.id}`} className="hover:text-brand">
+                      {c.name}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 leading-relaxed text-muted">{c.description}</p>
                 </div>
-              </Reveal>
+                <ul className="flex flex-wrap gap-2">
+                  {servicesIn(c.id).map((s) => (
+                    <li key={s.slug}>
+                      <Link
+                        href={serviceHref(s.slug)}
+                        className="inline-flex items-center gap-1 rounded-full border border-line bg-white px-3.5 py-1.5 text-sm text-ink-2 transition-colors hover:border-brand hover:text-brand"
+                      >
+                        {s.title} <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <ProcessSection />
-      <Awards />
-      <CTASection />
+      {/* Process */}
+      <section className="py-20 sm:py-28" aria-labelledby="process-heading">
+        <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <SectionHeading
+              eyebrow="How we work"
+              title={
+                <span id="process-heading">
+                  Our <em>delivery</em> process
+                </span>
+              }
+              lead="The same transparent, six-stage process runs through every engagement — adapted to the size and type of your project."
+            />
+          </div>
+          <ProcessScroll steps={processSteps} />
+        </Container>
+      </section>
+
+      {/* Engagement models */}
+      <section className="relative overflow-hidden bg-brand py-20 text-white noise sm:py-28" aria-labelledby="engage-heading">
+        <div aria-hidden="true" className="absolute -right-40 -top-40 size-[36rem] rounded-full border border-white/10" />
+        <Container className="relative">
+          <SectionHeading
+            light
+            eyebrow="Ways to work together"
+            title={
+              <span id="engage-heading">
+                Flexible <em>engagement</em> models
+              </span>
+            }
+          />
+          <ul className="mt-14 grid gap-5 md:grid-cols-3">
+            {engagement.map((e, i) => (
+              <li key={e.title} data-reveal style={{ ["--d" as string]: i * 90 }} className="glass-dark rounded-3xl p-8">
+                <span className="font-mono text-xs text-mint">0{i + 1}</span>
+                <h3 className="mt-6 text-2xl font-semibold">{e.title}</h3>
+                <p className="mt-3 leading-relaxed text-white/70">{e.text}</p>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* Industries */}
+      <section className="py-20 sm:py-28" aria-labelledby="ind-heading">
+        <Container>
+          <SectionHeading
+            eyebrow="Industries"
+            title={
+              <span id="ind-heading">
+                Industries <em>we serve</em>
+              </span>
+            }
+          />
+          <ul className="mt-12 flex flex-wrap gap-3">
+            {industries.map((ind, i) => (
+              <li
+                key={ind.name}
+                data-reveal
+                style={{ ["--d" as string]: i * 40 }}
+                className="rounded-full border border-line bg-white px-5 py-3 font-medium text-ink-2 shadow-soft"
+                title={ind.text}
+              >
+                {ind.name}
+              </li>
+            ))}
+          </ul>
+          <div data-reveal className="mt-12">
+            <Button href="/portfolio" variant="secondary">
+              See our work
+            </Button>
+          </div>
+        </Container>
+      </section>
+
+      <CTA />
     </>
   );
 }

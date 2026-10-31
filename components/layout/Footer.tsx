@@ -1,110 +1,109 @@
 import Link from "next/link";
-import { Mail, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import Container from "@/components/ui/Container";
-import { LinkedInIcon, XIcon, InstagramIcon } from "@/components/ui/SocialIcons";
-import {
-  industriesNav,
-  locationsNav,
-  companyNav,
-  footerServiceLinks,
-  footerResourceLinks,
-} from "@/data/nav";
+import Logo from "@/components/ui/Logo";
+import { socialIconFor } from "@/components/ui/SocialIcons";
+import { categories, servicesIn, serviceHref } from "@/data/services";
+import { site } from "@/lib/site";
+
+const company = [
+  { label: "About us", href: "/about-us" },
+  { label: "Our work", href: "/portfolio" },
+  { label: "All services", href: "/services" },
+  { label: "Contact us", href: "/contact-us" },
+  { label: "Privacy policy", href: "/privacy-policy" },
+  { label: "Terms of use", href: "/terms-of-use" },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-line bg-surface-dark text-white/80">
-      <Container className="py-16">
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-6">
-          <div className="col-span-2 sm:col-span-3 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="flex size-9 items-center justify-center rounded-lg bg-brand font-display text-base font-bold text-white">
-                O7
-              </span>
-              <span className="font-display text-lg font-bold text-white">The Orbit 7</span>
+    <footer className="relative overflow-hidden bg-brand-950 text-white/70 noise">
+      <div className="pointer-events-none absolute -left-40 top-0 size-[38rem] rounded-full bg-brand-600/30 blur-[120px]" />
+      <Container className="relative">
+        <div className="grid gap-12 border-b border-white/10 py-16 lg:grid-cols-[1.2fr_2fr] lg:py-20">
+          <div>
+            <Link href="/" aria-label="The Orbit 7 — home">
+              <Logo light />
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-              Engineering AI-powered digital systems for scalable businesses — mobile, web,
-              backend, and automation, built by one accountable team.
+            <p className="mt-6 max-w-sm leading-relaxed text-white/60">
+              {site.description}
             </p>
-            <div className="mt-6 flex gap-3">
-              {[
-                { Icon: LinkedInIcon, label: "LinkedIn", href: "https://www.linkedin.com/company/theorbit7" },
-                { Icon: XIcon, label: "X (Twitter)", href: "https://twitter.com/theorbit7" },
-                { Icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/theorbit7" },
-              ].map(({ Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex size-9 items-center justify-center rounded-full border border-white/15 transition-colors hover:border-brand-light hover:text-white"
-                >
-                  <Icon className="size-4" />
+            <div className="mt-8 space-y-3 text-sm">
+              <a href={`mailto:${site.email}`} className="flex items-center gap-3 text-white hover:text-mint">
+                <Mail className="size-4 text-mint" aria-hidden="true" /> {site.email}
+              </a>
+              {site.phone && (
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 text-white hover:text-mint">
+                  <Phone className="size-4 text-mint" aria-hidden="true" /> {site.phone}
                 </a>
-              ))}
+              )}
             </div>
+            <ul className="mt-8 flex gap-2.5">
+              {site.social.map((s) => {
+                const Icon = socialIconFor(s.label);
+                return (
+                  <li key={s.label}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`The Orbit 7 on ${s.label}`}
+                      className="flex size-10 items-center justify-center rounded-full border border-white/15 transition-colors hover:border-mint hover:text-mint"
+                    >
+                      <Icon className="size-4" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
 
-          <FooterCol title="Services" links={footerServiceLinks} />
-          <FooterCol
-            title="Industries"
-            links={industriesNav}
-          />
-          <FooterCol title="Locations" links={locationsNav} />
-          <FooterCol title="Company" links={companyNav} />
-          <FooterCol title="Resources" links={footerResourceLinks} />
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3">
+            {categories.map((cat) => (
+              <nav key={cat.id} aria-label={cat.name}>
+                <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-mint">{cat.name}</p>
+                <ul className="mt-4 space-y-2.5 text-sm">
+                  {servicesIn(cat.id).map((s) => (
+                    <li key={s.slug}>
+                      <Link href={serviceHref(s.slug)} className="link-underline hover:text-white">
+                        {s.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
+            <nav aria-label="Company">
+              <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-mint">Company</p>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                {company.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} className="link-underline hover:text-white">
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:gap-8">
-          <a href="mailto:hello@theorbit7.com" className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
-            <Mail className="size-4" /> hello@theorbit7.com
-          </a>
-          <a href="tel:+18005550147" className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
-            <Phone className="size-4" /> +1 (800) 555-0147
-          </a>
-        </div>
-
-        <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} The Orbit 7. All rights reserved.</p>
-          <div className="flex flex-wrap gap-5">
-            <Link href="/privacy-policy" className="hover:text-white">
-              Privacy Policy
+        <div className="flex flex-col items-start justify-between gap-6 py-10 sm:flex-row sm:items-end">
+          <p
+            aria-hidden="true"
+            className="select-none font-display text-[18vw] leading-[0.8] font-semibold tracking-[-0.06em] text-white/[0.06] sm:text-[9rem]"
+          >
+            orbit<span className="accent">7</span>
+          </p>
+          <div className="flex flex-col gap-2 text-sm sm:items-end">
+            <Link href="/contact-us" className="inline-flex items-center gap-2 text-white hover:text-mint">
+              Let&apos;s build something remarkable <ArrowUpRight className="size-4" aria-hidden="true" />
             </Link>
-            <Link href="/terms-of-use" className="hover:text-white">
-              Terms of Use
-            </Link>
-            <Link href="/site-map" className="hover:text-white">
-              Sitemap
-            </Link>
+            <p className="text-white/50">© {year} {site.name}. All rights reserved.</p>
           </div>
         </div>
       </Container>
     </footer>
-  );
-}
-
-function FooterCol({
-  title,
-  links,
-}: {
-  title: string;
-  links: { label: string; href: string }[];
-}) {
-  return (
-    <div>
-      <p className="text-sm font-semibold text-white">{title}</p>
-      <ul className="mt-4 space-y-2.5">
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link href={link.href} className="text-sm text-white/60 hover:text-white">
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

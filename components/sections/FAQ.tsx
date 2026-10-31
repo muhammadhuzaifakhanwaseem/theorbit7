@@ -1,77 +1,51 @@
-"use client";
-
-import { useState } from "react";
 import { Plus } from "lucide-react";
-import { cn } from "@/lib/utils";
+import Container from "@/components/ui/Container";
+import SectionHeading from "@/components/ui/SectionHeading";
+import Button from "@/components/ui/Button";
 
-export interface FAQItem {
-  q: string;
-  a: string;
-}
-
+/** Native <details> accordion — answers are always in the HTML for crawlers. */
 export default function FAQ({
-  items,
-  title = "Frequently asked questions",
+  faqs,
+  title = (
+    <>
+      Questions, <em>answered</em>
+    </>
+  ),
+  eyebrow = "FAQ",
+  lead = "Straight answers to the questions we hear most. Can't find yours? Just ask.",
 }: {
-  items: FAQItem[];
-  title?: string;
+  faqs: { q: string; a: string }[];
+  title?: React.ReactNode;
+  eyebrow?: string;
+  lead?: string;
 }) {
-  const [open, setOpen] = useState<number | null>(0);
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: { "@type": "Answer", text: item.a },
-    })),
-  };
-
   return (
-    <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
-      {title && (
-        <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">{title}</h2>
-      )}
-      <dl className="mt-8 divide-y divide-line border-t border-line">
-        {items.map((item, i) => {
-          const isOpen = open === i;
-          return (
-            <div key={i} className="py-5">
-              <dt>
-                <button
-                  className="flex w-full items-center justify-between gap-4 text-left"
-                  aria-expanded={isOpen}
-                  onClick={() => setOpen(isOpen ? null : i)}
-                >
-                  <span className="text-base font-medium text-ink sm:text-lg">{item.q}</span>
-                  <Plus
-                    className={cn(
-                      "size-5 shrink-0 text-brand transition-transform duration-200",
-                      isOpen && "rotate-45"
-                    )}
-                    aria-hidden="true"
-                  />
-                </button>
-              </dt>
-              <dd
-                className={cn(
-                  "grid overflow-hidden transition-all duration-300 ease-out",
-                  isOpen ? "grid-rows-[1fr] opacity-100 pt-3" : "grid-rows-[0fr] opacity-0"
-                )}
-              >
-                <p className="overflow-hidden text-sm leading-relaxed text-ink-muted sm:text-base">
-                  {item.a}
-                </p>
-              </dd>
-            </div>
-          );
-        })}
-      </dl>
-    </div>
+    <section className="py-20 sm:py-28" aria-labelledby="faq-heading">
+      <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div className="lg:sticky lg:top-32 lg:self-start">
+          <SectionHeading eyebrow={eyebrow} title={<span id="faq-heading">{title}</span>} lead={lead} />
+          <div data-reveal className="mt-8">
+            <Button href="/contact-us" variant="secondary">
+              Ask us anything
+            </Button>
+          </div>
+        </div>
+        <div className="divide-y divide-line border-y border-line">
+          {faqs.map((f, i) => (
+            <details key={f.q} className="group" data-reveal style={{ ["--d" as string]: i * 60 }} open={i === 0}>
+              <summary className="flex items-start justify-between gap-6 py-6">
+                <h3 className="text-lg font-medium tracking-[-0.01em] text-ink transition-colors group-hover:text-brand sm:text-xl">
+                  {f.q}
+                </h3>
+                <span className="faq-icon mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-line-strong text-brand transition-all duration-300">
+                  <Plus className="size-4" aria-hidden="true" />
+                </span>
+              </summary>
+              <div className="faq-body pb-7 pr-12 leading-relaxed text-muted">{f.a}</div>
+            </details>
+          ))}
+        </div>
+      </Container>
+    </section>
   );
 }

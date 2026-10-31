@@ -1,13 +1,35 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/utils";
+import { site } from "@/lib/site";
+
+/**
+ * All public pages are open to search engines and AI assistants / answer
+ * engines. Only API endpoints are excluded.
+ */
+const aiAndSearchBots = [
+  "Googlebot",
+  "Bingbot",
+  "Google-Extended",
+  "GPTBot",
+  "OAI-SearchBot",
+  "ChatGPT-User",
+  "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
+  "PerplexityBot",
+  "Perplexity-User",
+  "Applebot",
+  "Applebot-Extended",
+  "DuckDuckBot",
+  "CCBot",
+];
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
-    sitemap: `${SITE_URL}/sitemap.xml`,
-    host: SITE_URL,
+    rules: [
+      { userAgent: "*", allow: "/", disallow: ["/api/"] },
+      ...aiAndSearchBots.map((userAgent) => ({ userAgent, allow: "/", disallow: ["/api/"] })),
+    ],
+    sitemap: `${site.url}/sitemap.xml`,
+    host: site.url,
   };
 }

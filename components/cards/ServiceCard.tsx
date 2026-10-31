@@ -1,33 +1,29 @@
 import Link from "next/link";
-import { ArrowUpRight, type LucideIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import type { Service } from "@/data/services";
+import { serviceHref, getCategory } from "@/data/services";
+import { cn } from "@/lib/utils";
 
-export default function ServiceCard({
-  href,
-  title,
-  description,
-  Icon,
-}: {
-  href: string;
-  title: string;
-  description: string;
-  Icon: LucideIcon;
-}) {
+export default function ServiceCard({ service, index, className }: { service: Service; index?: number; className?: string }) {
   return (
     <Link
-      href={href}
-      className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_20px_45px_-25px_rgba(22,62,51,0.35)]"
+      href={serviceHref(service.slug)}
+      data-reveal
+      style={index !== undefined ? { ["--d" as string]: (index % 3) * 80 } : undefined}
+      className={cn(
+        "group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white p-6 transition-all duration-500 ease-premium hover:-translate-y-1 hover:border-brand/25 hover:shadow-lift sm:p-7",
+        className,
+      )}
     >
-      <div>
-        <div className="flex size-12 items-center justify-center rounded-xl bg-brand-tint text-brand transition-colors group-hover:bg-brand group-hover:text-white">
-          <Icon className="size-6" aria-hidden="true" />
-        </div>
-        <h3 className="mt-6 font-display text-xl font-semibold text-ink">{title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-ink-muted">{description}</p>
+      <span className="pointer-events-none absolute -right-20 -top-20 size-48 rounded-full bg-mint opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-70" />
+      <div className="relative flex items-start justify-between gap-4">
+        <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-soft">{getCategory(service.category).short}</span>
+        <span className="flex size-9 items-center justify-center rounded-full border border-line text-brand transition-all duration-500 group-hover:rotate-45 group-hover:border-brand group-hover:bg-brand group-hover:text-white">
+          <ArrowUpRight className="size-4" aria-hidden="true" />
+        </span>
       </div>
-      <div className="mt-8 flex items-center gap-1.5 text-sm font-medium text-brand">
-        Explore service
-        <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-      </div>
+      <h3 className="relative mt-8 text-xl font-semibold tracking-[-0.02em] sm:text-[1.4rem]">{service.title}</h3>
+      <p className="relative mt-3 text-[0.95rem] leading-relaxed text-muted">{service.summary}</p>
     </Link>
   );
 }

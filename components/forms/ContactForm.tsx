@@ -1,145 +1,210 @@
 "use client";
 
 import { useState } from "react";
-import { services } from "@/data/services";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Check, Loader2, Mail } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const budgetRanges = [
-  "Under $25,000",
-  "$25,000 – $50,000",
-  "$50,000 – $100,000",
-  "$100,000 – $250,000",
-  "$250,000+",
-  "Not sure yet",
-];
+type Status = "idle" | "sending" | "sent" | "fallback" | "error";
 
-export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "submitted">("idle");
+export default function ContactForm({ services, email }: { services: string[]; email: string }) {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [fallbackHref, setFallbackHref] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("submitting");
-    window.setTimeout(() => setStatus("submitted"), 700);
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+
+    const local: Record<string, string> = {};
+    if ((data.name ?? "").trim().length < 2) local.name = "Please enter your name.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email ?? "")) local.email = "Please enter a valid email address.";
+    if ((data.message ?? "").trim().length < 10) local.message = "Please tell us a little more (at least 10 characters).";
+    setErrors(local);
+    if (Object.keys(local).length) {
+      form.querySelector<HTMLElement>(`[name="${Object.keys(local)[0]}"]`)?.focus();
+      return;
+    }
+
+    setStatus("sending");
+    const mailto = `mailto:${email}?subject=${encodeURIComponent(
+      `Project enquiry${data.service ? ` — ${data.service}` : ""}`,
+    )}&body=${encodeURIComponent(
+      `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "-"}\nService: ${data.service || "-"}\n\n${data.message}`,
+    )}`;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.ok) {
+        setStatus("sent");
+        form.reset();
+      } else if (res.status === 422 && json.errors) {
+        setErrors(json.errors);
+        setStatus("idle");
+      } else {
+        setFallbackHref(mailto);
+        setStatus("fallback");
+      }
+    } catch {
+      setFallbackHref(mailto);
+      setStatus("fallback");
+    }
   }
 
-  if (status === "submitted") {
-    return (
-      <div className="rounded-2xl border border-line bg-surface p-8 text-center sm:p-12">
-        <h3 className="font-display text-2xl font-semibold text-ink">Message sent</h3>
-        <p className="mt-3 text-ink-muted">
-          Thanks for reaching out. A member of our team will respond within one business day.
-        </p>
-      </div>
-    );
-  }
+  const field =
+    "peer w-full rounded-2xl border border-line-strong bg-white px-4 pb-3 pt-6 text-[0.97rem] text-ink outline-none transition-all duration-300 placeholder:text-transparent focus:border-brand focus:ring-4 focus:ring-brand/10";
+  const label =
+    "pointer-events-none absolute left-4 top-4 origin-left text-[0.97rem] text-muted transition-all duration-300 peer-focus:top-2 peer-focus:text-xs peer-focus:text-brand peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-      <div className="grid gap-6 sm:grid-cols-2">
-        <Field label="First name" name="firstName" autoComplete="given-name" required />
-        <Field label="Last name" name="lastName" autoComplete="family-name" required />
-      </div>
-      <div className="grid gap-6 sm:grid-cols-2">
-        <Field label="Email" name="email" type="email" autoComplete="email" required />
-        <Field label="Phone" name="phone" type="tel" autoComplete="tel" />
-      </div>
-      <Field label="Company" name="company" autoComplete="organization" />
-
-      <div className="grid gap-6 sm:grid-cols-2">
-        <div>
-          <label htmlFor="service" className="text-sm font-medium text-ink">
-            Service you need
-          </label>
-          <select
-            id="service"
-            name="service"
-            className="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none focus:border-brand"
-            defaultValue=""
+    <div className="relative">
+      <AnimatePresence mode="wait">
+        {status === "sent" ? (
+          <motion.div
+            key="sent"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex min-h-[28rem] flex-col items-center justify-center text-center"
+            role="status"
           >
-            <option value="" disabled>
-              Select a service
-            </option>
-            {services.map((s) => (
-              <option key={s.slug} value={s.title}>
-                {s.title}
-              </option>
-            ))}
-            <option value="Not sure yet">Not sure yet</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="budget" className="text-sm font-medium text-ink">
-            Estimated budget
-          </label>
-          <select
-            id="budget"
-            name="budget"
-            className="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none focus:border-brand"
-            defaultValue=""
-          >
-            <option value="" disabled>
-              Select a range
-            </option>
-            {budgetRanges.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+            <span className="flex size-16 items-center justify-center rounded-full bg-brand text-white shadow-brand">
+              <Check className="size-7" />
+            </span>
+            <h3 className="mt-6 text-2xl font-semibold">Thank you — message received.</h3>
+            <p className="mt-3 max-w-sm text-muted">We&apos;ll review your enquiry and reply by email as soon as possible.</p>
+            <button type="button" onClick={() => setStatus("idle")} className="mt-8 cursor-pointer text-sm font-medium text-brand underline underline-offset-4">
+              Send another message
+            </button>
+          </motion.div>
+        ) : (
+          <motion.form key="form" noValidate onSubmit={onSubmit} className="space-y-4" aria-describedby="form-note">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field name="name" label="Your name *" autoComplete="name" error={errors.name} field={field} labelCls={label} />
+              <Field name="email" type="email" label="Email address *" autoComplete="email" error={errors.email} field={field} labelCls={label} />
+            </div>
+            <Field name="company" label="Company (optional)" autoComplete="organization" field={field} labelCls={label} />
+            <div className="relative">
+              <label htmlFor="service" className="sr-only">
+                Service you are interested in
+              </label>
+              <select id="service" name="service" defaultValue="" className={cn(field, "cursor-pointer appearance-none pt-4 pb-4")}>
+                <option value="">What can we help with?</option>
+                {services.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+                <option value="Not sure yet">Not sure yet — I need advice</option>
+              </select>
+              <span aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted">▾</span>
+            </div>
+            <div className="relative">
+              <textarea
+                id="message"
+                name="message"
+                rows={5}
+                placeholder="Message"
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? "message-error" : undefined}
+                className={cn(field, "resize-y", errors.message && "border-[#c2452f]")}
+              />
+              <label htmlFor="message" className={label}>
+                Tell us about your project *
+              </label>
+              {errors.message && (
+                <p id="message-error" className="mt-1.5 text-sm text-[#b23a26]">
+                  {errors.message}
+                </p>
+              )}
+            </div>
+            {/* honeypot */}
+            <div aria-hidden="true" className="absolute -left-[9999px]">
+              <label htmlFor="website">Website</label>
+              <input id="website" name="website" tabIndex={-1} autoComplete="off" />
+            </div>
 
-      <div>
-        <label htmlFor="details" className="text-sm font-medium text-ink">
-          Project details
-        </label>
-        <textarea
-          id="details"
-          name="details"
-          rows={5}
-          required
-          placeholder="Tell us what you're building, your timeline, and anything else that would help us prepare for the call."
-          className="mt-2 w-full resize-none rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink-soft focus:border-brand"
-        />
-      </div>
+            {status === "fallback" && (
+              <div role="alert" className="rounded-2xl border border-gold/40 bg-sand p-4 text-sm text-ink-2">
+                Our online form is temporarily unavailable. Please send your enquiry by email instead — we&apos;ve
+                prepared it for you.
+                <a href={fallbackHref} className="mt-3 inline-flex items-center gap-2 font-medium text-brand underline underline-offset-4">
+                  <Mail className="size-4" /> Email {email}
+                </a>
+              </div>
+            )}
 
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="w-full rounded-full bg-brand px-7 py-3.5 text-base font-medium text-white transition-colors hover:bg-brand-dark disabled:opacity-60 sm:w-auto"
-      >
-        {status === "submitting" ? "Sending..." : "Send message"}
-      </button>
-    </form>
+            <div className="flex flex-col items-start gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
+              <p id="form-note" className="text-xs text-muted">
+                By sending this form you agree to our{" "}
+                <a href="/privacy-policy" className="underline underline-offset-2">
+                  privacy policy
+                </a>
+                .
+              </p>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="group inline-flex min-h-12 cursor-pointer items-center gap-3 rounded-full bg-brand py-2.5 pl-6 pr-2.5 font-medium text-white shadow-brand transition-colors hover:bg-brand-800 disabled:cursor-wait disabled:opacity-70"
+              >
+                {status === "sending" ? "Sending…" : "Send message"}
+                <span className="flex size-8 items-center justify-center rounded-full bg-white/15">
+                  {status === "sending" ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
+                  )}
+                </span>
+              </button>
+            </div>
+          </motion.form>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
 function Field({
-  label,
   name,
+  label,
   type = "text",
   autoComplete,
-  required,
+  error,
+  field,
+  labelCls,
 }: {
-  label: string;
   name: string;
+  label: string;
   type?: string;
   autoComplete?: string;
-  required?: boolean;
+  error?: string;
+  field: string;
+  labelCls: string;
 }) {
   return (
-    <div>
-      <label htmlFor={name} className="text-sm font-medium text-ink">
-        {label}
-        {required && <span className="text-brand"> *</span>}
-      </label>
+    <div className="relative">
       <input
         id={name}
         name={name}
         type={type}
+        placeholder={label}
         autoComplete={autoComplete}
-        required={required}
-        className="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink-soft focus:border-brand"
+        aria-invalid={!!error}
+        aria-describedby={error ? `${name}-error` : undefined}
+        className={cn(field, error && "border-[#c2452f]")}
       />
+      <label htmlFor={name} className={labelCls}>
+        {label}
+      </label>
+      {error && (
+        <p id={`${name}-error`} className="mt-1.5 text-sm text-[#b23a26]">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
