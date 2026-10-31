@@ -22,8 +22,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid request." }, { status: 400 });
   }
 
-  // Honeypot: real users never fill this hidden field.
-  if (clean(body.website, 200)) return NextResponse.json({ ok: true });
+  // Honeypot: real users never fill this hidden field. Suspected bots are still stored
+  // (status "spam") rather than dropped, so a false positive is never lost.
+  const honeypot = clean(body.o7_hp, 200);
 
   const data = {
     name: clean(body.name, MAX.name),
@@ -64,7 +65,8 @@ export async function POST(req: Request) {
 
     await submissions.insertOne({
       ...data,
-      status: "new",
+      status: honeypot ? "spam" : "new",
+      ...(honeypot ? { spamReason: "honeypot" } : {}),
       createdAt: new Date(),
       ip,
       userAgent: req.headers.get("user-agent")?.slice(0, 300) ?? null,

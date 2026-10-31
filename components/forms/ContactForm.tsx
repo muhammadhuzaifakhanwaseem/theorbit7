@@ -124,8 +124,8 @@ export default function ContactForm({ services, email }: { services: string[]; e
             </div>
             {/* honeypot */}
             <div aria-hidden="true" className="absolute -left-[9999px]">
-              <label htmlFor="website">Website</label>
-              <input id="website" name="website" tabIndex={-1} autoComplete="off" />
+              <label htmlFor="o7_hp">Leave this field empty</label>
+              <input id="o7_hp" name="o7_hp" type="text" tabIndex={-1} autoComplete="off" data-lpignore="true" data-1p-ignore />
             </div>
 
             {status === "fallback" && (
