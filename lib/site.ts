@@ -10,7 +10,7 @@ export const site = {
   tagline: "Digital agency & software house",
   description:
     "The Orbit 7 is a full-service digital agency and software house. We design and build websites, custom software, mobile apps and AI automation, and grow them with SEO, paid media and social marketing.",
-  email: "huzaifakhanwaseem2233@gmail.com",
+  email: "info@theorbit7.com",
   // Add a real phone / WhatsApp number to show them across the site, e.g. "+92 300 0000000".
   phone: "+92 323 6964669" as string,
   whatsapp: "+92 323 6964669" as string,
