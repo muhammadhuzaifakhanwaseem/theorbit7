@@ -1,11 +1,13 @@
 import { categories, servicesIn } from "@/data/services";
 import { homeFaqs } from "@/data/content";
+import { getLatestPosts } from "@/lib/blog/db";
 import { site, absoluteUrl } from "@/lib/site";
 
-export const dynamic = "force-static";
+export const revalidate = 300;
 
 /** llms.txt — a plain-text map of the site for AI assistants (see llmstxt.org). */
-export function GET() {
+export async function GET() {
+  const posts = await getLatestPosts(30);
   const lines: string[] = [
     `# ${site.name}`,
     "",
@@ -18,6 +20,7 @@ export function GET() {
     `- [All services](${absoluteUrl("/services")}): overview of every service category`,
     `- [Our work](${absoluteUrl("/portfolio")}): representative projects`,
     `- [Contact](${absoluteUrl("/contact-us")}): request a free consultation (email: ${site.email})`,
+    `- [Blog](${absoluteUrl("/blogs")}): guides and insights on web, apps, AI and digital marketing`,
     "",
   ];
   for (const c of categories) {
@@ -25,6 +28,11 @@ export function GET() {
     for (const s of servicesIn(c.id)) {
       lines.push(`- [${s.title}](${absoluteUrl(`/services/${s.slug}`)}): ${s.summary}`);
     }
+    lines.push("");
+  }
+  if (posts.length) {
+    lines.push("## Latest articles", "");
+    for (const p of posts) lines.push(`- [${p.title}](${absoluteUrl(`/blogs/${p.slug}`)}): ${p.excerpt}`);
     lines.push("");
   }
   lines.push("## Frequently asked questions", "");

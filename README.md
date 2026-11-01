@@ -20,6 +20,8 @@ npm run lint
 | `/about-us`, `/portfolio`, `/contact-us` | Company pages |
 | `/privacy-policy`, `/terms-of-use` | Legal |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | Search and AI discovery |
+| `/blogs`, `/blogs/[slug]` | Blog listing (search, categories, pagination) and articles (ISR, refreshed on publish) |
+| `/media/[id]` | Images uploaded through the CMS (MongoDB GridFS, cached for a year) |
 | `/api/contact` | Contact form endpoint (saves to MongoDB) |
 | `/admin` | Private inquiries panel (login required, noindex, blocked in robots.txt) |
 
@@ -74,6 +76,25 @@ sitemap, llms.txt and schema all pick it up automatically.
 - Security: scrypt-hashed passwords, random session tokens stored hashed in MongoDB (7-day expiry, httpOnly cookie),
   failed-login throttling (10 per 15 minutes per IP). Collections: `admin_users`, `admin_sessions`,
   `admin_login_attempts`, `submissions`.
+
+## Blog CMS
+
+- **Admin → Blog** (admin role): searchable/filterable post table, Tiptap rich-text editor (H1–H3, formatting,
+  alignment, lists, quotes, links, image upload with alt text and captions, tables, code blocks, dividers,
+  undo/redo, paste/drag images), draft / publish now / schedule, preview, featured image, category, author,
+  excerpt and SEO fields (meta title/description with counters, focus + secondary keywords, slug, canonical,
+  social image, Google preview, SEO checklist). Categories and authors have their own tabs.
+- **Storage**: collections `blog_posts`, `blog_categories`, `blog_authors`; images in GridFS bucket `media`
+  (re-encoded to WebP, max 2000px). Content is stored as the editor JSON (for editing) plus server-sanitised HTML
+  (for rendering).
+- **Visibility**: only `published` posts and `scheduled` posts whose time has passed are public; drafts 404 and are
+  never in the sitemap. Changing a published slug keeps the old URL 308-redirecting.
+- **Freshness**: publishing revalidates `/`, `/blogs`, the post, `sitemap.xml` and `llms.txt` immediately; pages also
+  revalidate every 5 minutes so scheduled posts go live on time.
+- **SEO**: per-post title/description/canonical/OG/Twitter metadata, `BlogPosting` + `BreadcrumbList` JSON-LD,
+  `Blog` schema on the listing, sitemap entries with `lastModified`.
+- **Migrations**: `npm run db:migrate` creates all indexes and default categories/author (idempotent). The app also
+  runs this setup automatically on first use, so nothing is required on Vercel.
 
 ## Before going live
 

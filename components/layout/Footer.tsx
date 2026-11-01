@@ -9,6 +9,7 @@ import { site } from "@/lib/site";
 const company = [
   { label: "About us", href: "/about-us" },
   { label: "Our work", href: "/portfolio" },
+  { label: "Blog", href: "/blogs" },
   { label: "All services", href: "/services" },
   { label: "Contact us", href: "/contact-us" },
   { label: "Privacy policy", href: "/privacy-policy" },

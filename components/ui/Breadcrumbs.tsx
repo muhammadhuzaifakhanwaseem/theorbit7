@@ -15,9 +15,9 @@ export default function Breadcrumbs({
         {items.map((item, i) => {
           const last = i === items.length - 1;
           return (
-            <li key={item.path} className="inline-flex items-center gap-1.5">
+            <li key={item.path} className="inline-flex min-w-0 items-center gap-1.5">
               {last ? (
-                <span aria-current="page" className="font-medium text-ink">
+                <span aria-current="page" className="block max-w-[15rem] truncate font-medium text-ink sm:max-w-md">
                   {item.name}
                 </span>
               ) : (

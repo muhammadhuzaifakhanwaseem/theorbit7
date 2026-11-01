@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Inbox, KeyRound, LogOut, Users } from "lucide-react";
+import { FileText, Inbox, KeyRound, LogOut, Users } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 import { requireUser } from "@/lib/auth";
 import { logoutAction } from "../actions";
@@ -9,7 +9,12 @@ export default async function PanelLayout({ children }: { children: React.ReactN
   const user = await requireUser();
   const nav = [
     { href: "/admin", label: "Inquiries", icon: <Inbox className="size-4" aria-hidden="true" /> },
-    ...(user.role === "admin" ? [{ href: "/admin/users", label: "Users", icon: <Users className="size-4" aria-hidden="true" /> }] : []),
+    ...(user.role === "admin"
+      ? [
+          { href: "/admin/blog", label: "Blog", icon: <FileText className="size-4" aria-hidden="true" /> },
+          { href: "/admin/users", label: "Users", icon: <Users className="size-4" aria-hidden="true" /> },
+        ]
+      : []),
     { href: "/admin/account", label: "My account", icon: <KeyRound className="size-4" aria-hidden="true" /> },
   ];
   return (

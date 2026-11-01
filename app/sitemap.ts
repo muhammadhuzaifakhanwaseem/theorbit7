@@ -1,12 +1,17 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/data/services";
+import { getSitemapPosts } from "@/lib/blog/db";
 import { absoluteUrl } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 300;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getSitemapPosts();
   const lastModified = new Date();
   const core: [string, number][] = [
     ["/", 1],
     ["/services", 0.9],
+    ["/blogs", 0.8],
     ["/about-us", 0.8],
     ["/portfolio", 0.8],
     ["/contact-us", 0.8],
@@ -25,6 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.85,
+    })),
+    ...posts.map((p) => ({
+      url: absoluteUrl(`/blogs/${p.slug}`),
+      lastModified: p.updatedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }

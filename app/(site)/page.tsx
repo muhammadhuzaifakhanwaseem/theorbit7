@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import HomeHero from "@/components/home/HomeHero";
 import ServicesExplorer from "@/components/home/ServicesExplorer";
 import ProcessScroll from "@/components/home/ProcessScroll";
+import LatestPosts from "@/components/home/LatestPosts";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
@@ -21,6 +22,9 @@ import { site } from "@/lib/site";
 const title = "The Orbit 7 | Digital Agency & Software House — Web, Apps, AI & SEO";
 const description =
   "The Orbit 7 is a full-service digital agency and software house. Website development, mobile apps, custom software, AI automation, SEO, Google Ads, social media and branding — one expert team.";
+
+/** Re-rendered at most every 5 minutes (and immediately on publish) so the latest blog posts stay current. */
+export const revalidate = 300;
 
 export const metadata = buildMetadata({
   title,
@@ -296,6 +300,8 @@ export default function HomePage() {
           </ul>
         </Container>
       </section>
+
+      <LatestPosts />
 
       <FAQ faqs={homeFaqs} lead={`Everything you need to know about working with ${site.name}.`} />
       <CTA />
