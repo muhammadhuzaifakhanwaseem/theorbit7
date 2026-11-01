@@ -1,4 +1,4 @@
-export type CategoryId = "web" | "mobile" | "software" | "marketing" | "creative";
+export type CategoryId = "software" | "ai" | "web" | "mobile" | "seo" | "marketing" | "design" | "video";
 
 export type VisualKind =
   | "browser"
@@ -18,6 +18,12 @@ export type VisualKind =
   | "ads"
   | "content"
   | "api"
+  | "answer"
+  | "voice"
+  | "graph"
+  | "podcast"
+  | "reels"
+  | "motion"
   | "shield";
 
 export interface Item {
@@ -58,6 +64,15 @@ export interface Service {
   tech: string[];
   faqs: FAQ[];
   related: string[];
+  /** Optional extras (used mainly by video editing pages). */
+  trust?: string[];
+  stats?: { value: string; label: string }[];
+  offer?: { title: string; text: string; cta: string };
+  packages?: { name: string; price: string; unit: string; delivery: string; features: string[]; popular?: boolean }[];
+  packagesNote?: string;
+  tools?: { name: string; use: string }[];
+  /** Overrides the default primary hero button label. */
+  primaryCta?: string;
 }
 
 export interface Category {
@@ -65,4 +80,6 @@ export interface Category {
   name: string;
   short: string;
   description: string;
+  /** Services shown in the navigation menu, in order (others remain on /services). */
+  nav: string[];
 }

@@ -7,7 +7,7 @@ export const webServices: Service[] = [
     category: "web",
     summary:
       "Fast, search-ready business websites designed to look premium and built to turn visitors into enquiries.",
-    metaTitle: "Website Development Company | Custom Business Websites | The Orbit 7",
+    metaTitle: "Website Development Company | The Orbit 7",
     metaDescription:
       "Custom website design and development that loads fast, ranks well and converts. The Orbit 7 builds responsive, SEO-ready business websites on Next.js and modern CMS platforms.",
     keywords: [
@@ -87,7 +87,7 @@ export const webServices: Service[] = [
   {
     slug: "custom-web-application-development",
     title: "Custom Web Application Development",
-    category: "web",
+    category: "software",
     summary:
       "Secure, scalable web apps, portals and dashboards engineered around your exact workflows.",
     metaTitle: "Custom Web Application Development Services | The Orbit 7",
@@ -173,7 +173,7 @@ export const webServices: Service[] = [
     category: "web",
     summary:
       "High-converting online stores on Shopify, WooCommerce and headless commerce — built to sell.",
-    metaTitle: "Ecommerce Website Development Company | Shopify & WooCommerce | The Orbit 7",
+    metaTitle: "Ecommerce Website Development Company | The Orbit 7",
     metaDescription:
       "Ecommerce development services for brands that want to sell more online. Custom Shopify, WooCommerce and headless stores with fast checkout, integrations and SEO built in.",
     keywords: [
@@ -256,7 +256,7 @@ export const webServices: Service[] = [
     category: "web",
     summary:
       "Custom WordPress themes, plugins and headless builds that are fast, secure and easy to edit.",
-    metaTitle: "WordPress Development Services | Custom Themes & Plugins | The Orbit 7",
+    metaTitle: "WordPress Development Services | The Orbit 7",
     metaDescription:
       "Professional WordPress development: custom themes, Gutenberg blocks, plugins, WooCommerce and headless WordPress. Fast, secure websites your team can manage with confidence.",
     keywords: [
@@ -336,10 +336,10 @@ export const webServices: Service[] = [
   {
     slug: "saas-development",
     title: "SaaS Development",
-    category: "web",
+    category: "software",
     summary:
       "Multi-tenant SaaS products, from MVP to scale, with billing, analytics and secure cloud architecture.",
-    metaTitle: "SaaS Development Company | SaaS Product & MVP Development | The Orbit 7",
+    metaTitle: "SaaS Development Company | The Orbit 7",
     metaDescription:
       "End-to-end SaaS development: product discovery, MVP, multi-tenant architecture, subscription billing and scaling. Launch and grow your software product with The Orbit 7.",
     keywords: [
@@ -414,7 +414,7 @@ export const webServices: Service[] = [
       { q: "How do you handle subscription billing?", a: "We usually integrate Stripe Billing for plans, trials, upgrades, proration, invoices and a self-service customer portal, and connect billing status to feature access in the app." },
       { q: "Do you sign NDAs?", a: "Yes. We are happy to sign a non-disclosure agreement before discussing your product idea in detail." },
     ],
-    related: ["custom-web-application-development", "ui-ux-design", "ai-development", "api-development-integration"],
+    related: ["custom-web-application-development", "ui-ux-design", "ai-application-development", "api-development-integration"],
   },
   {
     slug: "website-maintenance",

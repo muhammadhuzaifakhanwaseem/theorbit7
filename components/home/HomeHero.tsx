@@ -3,7 +3,8 @@ import Button from "@/components/ui/Button";
 import SplitWords from "@/components/ui/SplitWords";
 import HeroOrbit from "@/components/visuals/HeroOrbit";
 import Marquee from "@/components/ui/Marquee";
-import { categories } from "@/data/services";
+import { categories, services } from "@/data/services";
+import BookCallButton from "@/components/booking/BookCallButton";
 
 export default function HomeHero() {
   return (
@@ -34,21 +35,19 @@ export default function HomeHero() {
             style={{ ["--delay" as string]: "0.65s" }}
           >
             The Orbit 7 is a full-service digital agency and software house. We design and engineer websites,
-            custom software, mobile apps and AI automation — then grow them with SEO, paid media and social
-            marketing.
+            custom software, mobile apps and AI solutions — then grow them with SEO, AI search optimization,
+            digital marketing and video.
           </p>
           <div className="fade-late mt-10 flex flex-wrap gap-3" style={{ ["--delay" as string]: "0.8s" }}>
-            <Button href="/contact-us" size="lg">
-              Start your project
-            </Button>
+            <BookCallButton size="lg">Book a free consultation</BookCallButton>
             <Button href="/services" variant="secondary" size="lg">
               Explore services
             </Button>
           </div>
           <dl className="fade-late mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-line pt-6" style={{ ["--delay" as string]: "0.95s" }}>
             {[
-              ["26", "specialist services"],
-              ["5", "disciplines, one team"],
+              [String(services.length), "specialist services"],
+              [String(categories.length), "disciplines, one team"],
               ["100%", "code & IP ownership"],
             ].map(([v, l]) => (
               <div key={l}>
@@ -71,7 +70,9 @@ export default function HomeHero() {
             "Mobile Apps",
             "Custom Software",
             "AI Automation",
-            "SEO",
+            "SEO, AEO & GEO",
+            "AI Search Optimization",
+            "Video Editing",
             "Google Ads",
             "Social Media",
             "UI/UX Design",

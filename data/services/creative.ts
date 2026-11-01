@@ -4,10 +4,10 @@ export const creativeServices: Service[] = [
   {
     slug: "ui-ux-design",
     title: "UI/UX Design",
-    category: "creative",
+    category: "design",
     summary:
       "Research-led user experience and interface design for websites, apps and software products.",
-    metaTitle: "UI/UX Design Agency | Product, Web & App Design Services | The Orbit 7",
+    metaTitle: "UI/UX Design Agency | Web & App Design | The Orbit 7",
     metaDescription:
       "UI/UX design services for websites, mobile apps and SaaS products. User research, wireframes, prototypes, design systems and polished interfaces that are intuitive and beautiful.",
     keywords: [
@@ -87,10 +87,10 @@ export const creativeServices: Service[] = [
   {
     slug: "branding-identity",
     title: "Branding & Identity",
-    category: "creative",
+    category: "design",
     summary:
       "Brand strategy, logo design and visual identity systems that make you memorable.",
-    metaTitle: "Branding Agency | Brand Identity & Logo Design Services | The Orbit 7",
+    metaTitle: "Branding Agency | Brand Identity & Logo Design | The Orbit 7",
     metaDescription:
       "Branding and brand identity services: brand strategy, naming, logo design, visual identity systems, tone of voice and brand guidelines that make your business distinctive and trusted.",
     keywords: [
@@ -170,10 +170,10 @@ export const creativeServices: Service[] = [
   {
     slug: "graphic-design",
     title: "Graphic Design",
-    category: "creative",
+    category: "design",
     summary:
       "Marketing, social, print and presentation design that keeps your brand sharp everywhere.",
-    metaTitle: "Graphic Design Services | Marketing, Social & Print Design | The Orbit 7",
+    metaTitle: "Graphic Design Services | The Orbit 7",
     metaDescription:
       "Professional graphic design services for social media, ads, brochures, presentations, packaging and print. On-brand creative delivered fast by The Orbit 7's design team.",
     keywords: [
@@ -253,10 +253,10 @@ export const creativeServices: Service[] = [
   {
     slug: "photography-videography",
     title: "Photography & Videography",
-    category: "creative",
+    category: "design",
     summary:
       "Brand, product and corporate photo and video production — from concept to final edit.",
-    metaTitle: "Photography & Videography Services | Video Production | The Orbit 7",
+    metaTitle: "Photography & Videography Services | The Orbit 7",
     metaDescription:
       "Commercial photography and video production for brands: product photography, corporate video, social reels, promotional films, motion graphics and professional post-production.",
     keywords: [

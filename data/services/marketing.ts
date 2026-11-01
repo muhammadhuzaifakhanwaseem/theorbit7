@@ -4,7 +4,7 @@ export const marketingServices: Service[] = [
   {
     slug: "seo-services",
     title: "SEO Services",
-    category: "marketing",
+    category: "seo",
     summary:
       "Search engine optimisation that grows qualified organic traffic, leads and sales.",
     metaTitle: "SEO Services Company | Search Engine Optimization Agency | The Orbit 7",
@@ -87,7 +87,7 @@ export const marketingServices: Service[] = [
   {
     slug: "local-seo",
     title: "Local SEO",
-    category: "marketing",
+    category: "seo",
     summary:
       "Rank in Google Maps and local search to win more customers near you.",
     metaTitle: "Local SEO Services | Google Maps & Business Profile | The Orbit 7",
@@ -170,10 +170,10 @@ export const marketingServices: Service[] = [
   {
     slug: "technical-seo",
     title: "Technical SEO",
-    category: "marketing",
+    category: "seo",
     summary:
       "Fix crawlability, speed, indexing and structured data so search engines can rank you.",
-    metaTitle: "Technical SEO Services | Audits, Core Web Vitals & Schema | The Orbit 7",
+    metaTitle: "Technical SEO Services | The Orbit 7",
     metaDescription:
       "Technical SEO services by developers: crawl and indexation fixes, Core Web Vitals, site architecture, JavaScript SEO, schema markup and migrations. Build a site search engines love.",
     keywords: [
@@ -256,7 +256,7 @@ export const marketingServices: Service[] = [
     category: "marketing",
     summary:
       "Profitable pay-per-click campaigns on Google, Meta and beyond, optimised for real conversions.",
-    metaTitle: "Google Ads & PPC Management Agency | Paid Search Services | The Orbit 7",
+    metaTitle: "Google Ads & PPC Management Agency | The Orbit 7",
     metaDescription:
       "Google Ads and PPC management focused on leads and sales, not clicks. Search, Performance Max, Shopping, YouTube and remarketing campaigns with conversion tracking and clear reporting.",
     keywords: [
@@ -339,7 +339,7 @@ export const marketingServices: Service[] = [
     category: "marketing",
     summary:
       "Strategy, content, community management and paid social that build brands and drive demand.",
-    metaTitle: "Social Media Marketing Agency | Social Media Management | The Orbit 7",
+    metaTitle: "Social Media Marketing Agency | The Orbit 7",
     metaDescription:
       "Social media marketing and management for Instagram, Facebook, LinkedIn and TikTok. Strategy, content creation, community management and paid social campaigns that grow your brand.",
     keywords: [
@@ -422,7 +422,7 @@ export const marketingServices: Service[] = [
     category: "marketing",
     summary:
       "Strategic content — articles, guides, video and copy — that attracts, educates and converts.",
-    metaTitle: "Content Marketing Services | SEO Content Writing & Strategy | The Orbit 7",
+    metaTitle: "Content Marketing Services | The Orbit 7",
     metaDescription:
       "Content marketing services that build authority and pipeline: content strategy, SEO blog writing, website copywriting, lead magnets, email content and video content production.",
     keywords: [

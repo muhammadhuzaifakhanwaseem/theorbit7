@@ -9,7 +9,7 @@ import { getService } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
-const title = "Our Work | Websites, Apps, Software & Marketing Projects | The Orbit 7";
+const title = "Our Work | Websites, Apps & Software Projects | The Orbit 7";
 const description =
   "Explore the kinds of websites, ecommerce platforms, mobile apps, ERP systems, AI solutions and growth campaigns The Orbit 7 designs, builds and grows for clients.";
 

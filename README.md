@@ -15,8 +15,11 @@ npm run lint
 | Route | Purpose |
 | --- | --- |
 | `/` | Homepage: hero, services explorer, about, featured work, process, tech, industries, FAQ, CTA |
-| `/services` | Overview of all 5 categories and 26 services |
-| `/services/[slug]` | 26 statically generated service landing pages (unique content, metadata, OG image, schema) |
+| `/services` | Overview of all 8 categories and 59 services |
+| `/services/[slug]` | 59 statically generated service pages (unique content, metadata, OG image, schema) |
+| `/video-editing` | Video editing landing page (12 video services, free-sample form) |
+| `/locations`, `/locations/[city]`, `/locations/[city]/[service]` | 12 city hubs + 15 service-in-city pages (`data/locations.ts`) |
+| `/leadership`, `/founders-letter`, `/press-media`, `/partnership`, `/life-at-the-orbit-7` | Company pages (`data/company.ts`) |
 | `/about-us`, `/portfolio`, `/contact-us` | Company pages |
 | `/privacy-policy`, `/terms-of-use` | Legal |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | Search and AI discovery |
@@ -96,9 +99,22 @@ sitemap, llms.txt and schema all pick it up automatically.
 - **Migrations**: `npm run db:migrate` creates all indexes and default categories/author (idempotent). The app also
   runs this setup automatically on first use, so nothing is required on Vercel.
 
+## Booking (Calendly)
+
+- Set `calendlyUrl` in `lib/site.ts` (or the `NEXT_PUBLIC_CALENDLY_URL` env var), e.g. `https://calendly.com/your-name/30min`.
+- With a URL: every "Book a free consultation" button opens an on-brand modal with the Calendly scheduler, and the
+  contact page shows an inline scheduler (loaded only when scrolled into view). Without a URL: buttons link to
+  `/contact-us#book`, which shows the phone numbers and WhatsApp.
+
+## Company content placeholders
+
+`data/company.ts` holds leadership profiles, the founder's letter, press items and open roles. Pages whose content
+is still empty (leadership, founder's letter, press) render a polished structure, are `noindex` and are excluded from
+the sitemap automatically until you add real content.
+
 ## Before going live
 
-1. **Contact details** live in `lib/site.ts` (email, phone, WhatsApp, optional postal address, social URLs).
+1. **Contact details** live in `lib/site.ts` (email, `phones`, WhatsApp, Calendly URL, optional postal address, social URLs).
    They appear automatically in the footer, contact page, schema and llms.txt.
 2. **Contact form storage**: submissions are saved to MongoDB (`MONGODB_URI`, provided by the Vercel → MongoDB Atlas
    integration) in database `theorbit7` (override with `MONGODB_DB`), collection `submissions`. View them in

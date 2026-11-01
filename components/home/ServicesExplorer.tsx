@@ -10,11 +10,14 @@ import type { VisualKind } from "@/data/services/types";
 import { cn } from "@/lib/utils";
 
 const catVisual: Record<string, VisualKind> = {
+  software: "code",
+  ai: "ai",
   web: "browser",
   mobile: "phone",
-  software: "flow",
+  seo: "answer",
   marketing: "chart",
-  creative: "design",
+  design: "design",
+  video: "podcast",
 };
 
 /**

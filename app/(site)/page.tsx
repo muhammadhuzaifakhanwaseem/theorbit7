@@ -4,6 +4,7 @@ import HomeHero from "@/components/home/HomeHero";
 import ServicesExplorer from "@/components/home/ServicesExplorer";
 import ProcessScroll from "@/components/home/ProcessScroll";
 import LatestPosts from "@/components/home/LatestPosts";
+import BookingBand from "@/components/home/BookingBand";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
@@ -19,7 +20,7 @@ import { buildMetadata } from "@/lib/seo";
 import { faqSchema, professionalServiceSchema, webPageSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
-const title = "The Orbit 7 | Digital Agency & Software House — Web, Apps, AI & SEO";
+const title = "The Orbit 7 | Digital Agency & Software House";
 const description =
   "Build and scale your business with The Orbit 7. We engineer high-performance websites, mobile apps, custom software, AI automation, and ROI-driven marketing.";
 
@@ -71,7 +72,7 @@ export default function HomePage() {
                   Every digital capability, <em>one orbit.</em>
                 </span>
               }
-              lead="Five disciplines and 26 specialist services — planned together, delivered by one accountable team, so your website, software and marketing finally pull in the same direction."
+              lead={`${categories.length} disciplines and ${services.length} specialist services — planned together, delivered by one accountable team, so your website, software and marketing finally pull in the same direction.`}
             />
             <div data-reveal>
               <Button href="/services" variant="secondary">
@@ -185,6 +186,8 @@ export default function HomePage() {
           <ProcessScroll steps={processSteps} />
         </Container>
       </section>
+
+      <BookingBand />
 
       {/* ─────────── Technologies ─────────── */}
       <section className="py-24 sm:py-32" aria-labelledby="tech-heading">

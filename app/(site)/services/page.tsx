@@ -15,18 +15,21 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { absoluteUrl } from "@/lib/site";
 
-const title = "Digital Agency Services | Web, Apps, Software, AI & Marketing | The Orbit 7";
+const title = "Services | Software, AI, Web, SEO & Video | The Orbit 7";
 const description =
-  "Explore all 26 services from The Orbit 7: website and ecommerce development, mobile apps, custom software, ERP, CRM, AI automation, SEO, Google Ads, social media, UI/UX, branding and video.";
+  `Explore all ${services.length} services from The Orbit 7: software and AI development, websites, mobile apps, SEO, AEO and GEO, digital marketing, design and video editing.`;
 
 export const metadata = buildMetadata({ title, description, path: "/services" });
 
 const visualFor: Record<string, VisualKind> = {
+  software: "code",
+  ai: "ai",
   web: "browser",
   mobile: "phone",
-  software: "api",
-  marketing: "search",
-  creative: "brand",
+  seo: "answer",
+  marketing: "chart",
+  design: "design",
+  video: "podcast",
 };
 
 const faqs = [
@@ -75,7 +78,7 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Our services"
         title="Everything your business needs to *win online.*"
-        lead="Five disciplines. Twenty-six specialist services. One team that plans, designs, builds and grows your digital presence — so every piece works together."
+        lead={`${categories.length} disciplines. ${services.length} specialist services. One team that plans, designs, builds and grows your digital presence — so every piece works together.`}
         crumbs={crumbs}
       >
         <nav aria-label="Service categories" className="flex flex-wrap gap-2">

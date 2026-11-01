@@ -16,15 +16,14 @@ export function organizationSchema() {
     email: site.email,
     ...(site.phone ? { telephone: site.phone } : {}),
     sameAs: site.social.map((s) => s.href),
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        contactType: "sales",
-        email: site.email,
-        ...(site.phone ? { telephone: site.phone } : {}),
-        availableLanguage: ["English"],
-      },
-    ],
+    contactPoint: site.phones.map((telephone, i) => ({
+      "@type": "ContactPoint",
+      contactType: i === 0 ? "sales" : "customer support",
+      telephone: telephone.replace(/\s/g, ""),
+      email: site.email,
+      areaServed: "Worldwide",
+      availableLanguage: ["English"],
+    })),
   };
 }
 

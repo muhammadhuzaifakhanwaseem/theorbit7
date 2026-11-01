@@ -7,7 +7,7 @@ export const softwareServices: Service[] = [
     category: "software",
     summary:
       "Bespoke business software that automates operations and gives you a competitive edge.",
-    metaTitle: "Custom Software Development Company | Bespoke Business Software | The Orbit 7",
+    metaTitle: "Custom Software Development Company | The Orbit 7",
     metaDescription:
       "Custom software development tailored to your processes. From discovery to deployment, The Orbit 7 builds secure, scalable bespoke software, modernises legacy systems and integrates your tools.",
     keywords: [
@@ -90,7 +90,7 @@ export const softwareServices: Service[] = [
     category: "software",
     summary:
       "Custom ERP systems that unify finance, inventory, HR and operations in one platform.",
-    metaTitle: "Custom ERP Development Company | ERP Software Solutions | The Orbit 7",
+    metaTitle: "Custom ERP Development Company | The Orbit 7",
     metaDescription:
       "Custom ERP software development and Odoo implementation. Unify inventory, finance, procurement, HR and production in one system built around your operations — by The Orbit 7.",
     keywords: [
@@ -173,7 +173,7 @@ export const softwareServices: Service[] = [
     category: "software",
     summary:
       "Custom CRMs and CRM customisation that help your team win and keep more customers.",
-    metaTitle: "Custom CRM Development Services | CRM Software & Integration | The Orbit 7",
+    metaTitle: "Custom CRM Development Services | The Orbit 7",
     metaDescription:
       "Custom CRM development, HubSpot and Salesforce customisation, and CRM integration. Manage leads, pipelines, customers and support in a CRM your sales team will actually use.",
     keywords: [
@@ -251,23 +251,24 @@ export const softwareServices: Service[] = [
     related: ["erp-development", "custom-software-development", "ai-automation", "api-development-integration"],
   },
   {
-    slug: "ai-development",
-    title: "AI Development",
-    category: "software",
+    slug: "ai-application-development",
+    title: "AI Application Development",
+    category: "ai",
     summary:
       "Practical AI applications, LLM integrations and intelligent features that create real business value.",
-    metaTitle: "AI Development Company | Custom AI & LLM Integration | The Orbit 7",
+    metaTitle: "AI Application Development Company | Custom AI Apps | The Orbit 7",
     metaDescription:
       "AI development services: custom AI applications, LLM and GPT integration, AI chatbots, RAG knowledge assistants and AI-powered product features — built responsibly by The Orbit 7.",
     keywords: [
+      "ai application development",
       "ai development company",
       "custom ai solutions",
       "llm integration services",
       "ai chatbot development",
       "generative ai development",
     ],
-    eyebrow: "AI Development Services",
-    h1: "AI Development That Solves Real Business Problems",
+    eyebrow: "AI Application Development",
+    h1: "AI Application Development That Solves Real Business Problems",
     heroLead:
       "We design and build AI applications, assistants and product features powered by modern language models — grounded in your data, secure by design and measured by business impact.",
     visual: "ai",
@@ -336,10 +337,10 @@ export const softwareServices: Service[] = [
   {
     slug: "ai-automation",
     title: "AI Automation",
-    category: "software",
+    category: "ai",
     summary:
       "Automated workflows that combine AI with your tools to eliminate repetitive work.",
-    metaTitle: "AI Automation Services | Business Workflow Automation | The Orbit 7",
+    metaTitle: "AI Automation Services | The Orbit 7",
     metaDescription:
       "AI automation and workflow automation services. We connect your apps with n8n, Make, Zapier and custom code, adding AI to handle emails, documents, leads and reporting automatically.",
     keywords: [
@@ -414,7 +415,7 @@ export const softwareServices: Service[] = [
       { q: "What happens when an automation fails?", a: "We build in retries, error handling and alerts, and log every run so issues can be diagnosed and fixed quickly." },
       { q: "How quickly can we see results?", a: "Simple automations can often go live quickly once access to the relevant tools is in place. We start with high-impact, low-complexity workflows to show value early." },
     ],
-    related: ["ai-development", "crm-development", "api-development-integration", "erp-development"],
+    related: ["ai-application-development", "crm-development", "api-development-integration", "erp-development"],
   },
   {
     slug: "api-development-integration",
@@ -422,7 +423,7 @@ export const softwareServices: Service[] = [
     category: "software",
     summary:
       "Robust APIs and system integrations that make your software work together.",
-    metaTitle: "API Development & Integration Services | REST & GraphQL | The Orbit 7",
+    metaTitle: "API Development & Integration Services | The Orbit 7",
     metaDescription:
       "API development and third-party integration services. We design secure REST and GraphQL APIs, connect payment, CRM, ERP and shipping systems, and build reliable backend services.",
     keywords: [

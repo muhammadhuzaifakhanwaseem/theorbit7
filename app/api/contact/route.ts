@@ -34,10 +34,21 @@ export async function POST(req: Request) {
     message: clean(body.message, MAX.message),
   };
 
+  // Extra fields from the video editing form (whitelisted, length-limited).
+  const rawDetails = (body.details && typeof body.details === "object" ? body.details : {}) as Record<string, unknown>;
+  const details = Object.fromEntries(
+    (["channel", "need", "episodes", "footage"] as const)
+      .map((k) => [k, clean(rawDetails[k], 500)] as const)
+      .filter(([, v]) => v),
+  );
+  const isVideo = body.variant === "video";
+
   const errors: Record<string, string> = {};
   if (data.name.length < 2) errors.name = "Please enter your name.";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) errors.email = "Please enter a valid email address.";
-  if (data.message.length < 10) errors.message = "Please tell us a little more (at least 10 characters).";
+  if (isVideo) {
+    if (!details.need) errors.need = "Please choose what you need.";
+  } else if (data.message.length < 10) errors.message = "Please tell us a little more (at least 10 characters).";
   if (Object.keys(errors).length) return NextResponse.json({ ok: false, errors }, { status: 422 });
 
   const db = getDb();
@@ -65,6 +76,8 @@ export async function POST(req: Request) {
 
     await submissions.insertOne({
       ...data,
+      ...(Object.keys(details).length ? { details } : {}),
+      source: isVideo ? "video-form" : "contact-form",
       status: honeypot ? "spam" : "new",
       ...(honeypot ? { spamReason: "honeypot" } : {}),
       createdAt: new Date(),

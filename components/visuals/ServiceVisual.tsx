@@ -560,6 +560,171 @@ const scenes: Record<VisualKind, () => React.ReactNode> = {
       </div>
     </div>
   ),
+  answer: () => (
+    <div className="w-full rounded-3xl border border-line bg-white p-5 shadow-lift">
+      <div className="flex items-center gap-2 rounded-full bg-paper px-4 py-2.5 ring-1 ring-line">
+        <Sparkles className="size-4 text-brand" />
+        <span className="text-[0.8rem] text-ink-2">which agency can help with ai search?</span>
+      </div>
+      <div className="mt-4 rounded-2xl bg-mint-50 p-4 ring-1 ring-brand/15">
+        <p className="flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-widest text-brand-500">
+          <Sparkles className="size-3" /> AI answer
+        </p>
+        <div className="mt-2.5 space-y-1.5">
+          <Bar w="96%" className="bg-brand/20" />
+          <Bar w="88%" className="bg-brand/20" />
+          <span className="block h-2 w-[62%] rounded-full bg-brand" style={{ animation: "rise 1s 0.4s both var(--ease-out)" }} />
+          <Bar w="74%" className="bg-brand/20" />
+        </div>
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          <span className="flex items-center gap-1 rounded-full bg-brand px-2.5 py-1 text-[0.6rem] font-medium text-white">
+            <span className="size-1.5 rounded-full bg-mint" /> yourbrand.com
+          </span>
+          {["source 2", "source 3"].map((s) => (
+            <span key={s} className="rounded-full bg-white px-2.5 py-1 text-[0.6rem] text-muted ring-1 ring-line">{s}</span>
+          ))}
+        </div>
+      </div>
+      <div className="mt-4 space-y-2 opacity-60">
+        <Bar w="40%" />
+        <Bar w="85%" />
+      </div>
+    </div>
+  ),
+  voice: () => (
+    <div className="flex w-full flex-col items-center rounded-3xl border border-line bg-white p-6 shadow-lift">
+      <div className="relative flex size-20 items-center justify-center">
+        <span className="absolute inset-0 animate-ping rounded-full bg-mint opacity-60" />
+        <span className="relative flex size-16 items-center justify-center rounded-full bg-brand text-white shadow-brand">
+          <svg viewBox="0 0 24 24" className="size-7" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg>
+        </span>
+      </div>
+      <div className="mt-5 flex h-12 items-center gap-1">
+        {[30, 55, 80, 45, 95, 60, 35, 75, 50, 85, 40, 65, 30, 55, 20].map((h, i) => (
+          <span key={i} className="w-1.5 origin-center rounded-full bg-brand-500" style={{ height: `${h}%`, animation: `bar 0.9s ${i * 60}ms ease-in-out infinite alternate` }} />
+        ))}
+      </div>
+      <p className="mt-4 rounded-2xl bg-mint-50 px-4 py-2 text-center text-[0.8rem] text-ink-2 ring-1 ring-brand/10">“Who&apos;s the best team near me for this?”</p>
+    </div>
+  ),
+  graph: () => (
+    <div className="relative aspect-[4/3] w-full rounded-3xl border border-line bg-white shadow-lift">
+      <svg viewBox="0 0 400 300" className="absolute inset-0 size-full" fill="none">
+        {[
+          [200, 150, 80, 70],
+          [200, 150, 320, 70],
+          [200, 150, 70, 220],
+          [200, 150, 330, 225],
+          [200, 150, 200, 265],
+          [80, 70, 70, 220],
+          [320, 70, 330, 225],
+        ].map(([x1, y1, x2, y2], i) => (
+          <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--brand-400)" strokeOpacity="0.4" strokeWidth="1.5" strokeDasharray="200" strokeDashoffset="200" style={{ animation: `dash 1.6s ${i * 0.12}s forwards var(--ease-out)` }} />
+        ))}
+      </svg>
+      {[
+        { l: "Your brand", x: "50%", y: "50%", main: true },
+        { l: "Services", x: "20%", y: "23%" },
+        { l: "Founder", x: "80%", y: "23%" },
+        { l: "Location", x: "17.5%", y: "73%" },
+        { l: "Reviews", x: "82.5%", y: "75%" },
+        { l: "Topics", x: "50%", y: "88%" },
+      ].map((n) => (
+        <span
+          key={n.l}
+          className={cn(
+            "absolute -translate-x-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-[0.7rem] font-medium",
+            n.main ? "bg-brand px-4 py-2.5 text-white shadow-brand" : "glass text-ink-2",
+          )}
+          style={{ left: n.x, top: n.y }}
+        >
+          {n.l}
+        </span>
+      ))}
+    </div>
+  ),
+  podcast: () => (
+    <div className="w-full overflow-hidden rounded-3xl bg-ink shadow-lift">
+      <div className="grid grid-cols-2 gap-1 p-1">
+        {[
+          "from-brand-500 to-brand-900",
+          "from-brand-400 to-brand",
+          "from-[#3a4a44] to-ink",
+          "from-brand to-brand-950",
+        ].map((g, i) => (
+          <div key={i} className={cn("relative aspect-video rounded-lg bg-gradient-to-br", g, i === 0 && "ring-2 ring-mint")}>
+            <span className="absolute left-2 top-2 font-mono text-[0.55rem] text-white/70">CAM {i + 1}</span>
+            <span className="absolute bottom-2 left-1/2 size-6 -translate-x-1/2 rounded-full bg-white/25" />
+            <span className="absolute bottom-0 left-1/2 h-3 w-12 -translate-x-1/2 rounded-t-full bg-white/20" />
+            {i === 0 && (
+              <span className="absolute right-2 top-2 flex items-center gap-1 font-mono text-[0.55rem] text-white">
+                <span className="size-1.5 rounded-full bg-[#e5533d]" style={{ animation: "blink 1.2s steps(1) infinite" }} /> LIVE CUT
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+      <div className="space-y-1.5 px-3 pb-3 pt-2">
+        <div className="flex h-8 items-center gap-[2px]">
+          {Array.from({ length: 48 }, (_, i) => (
+            <span key={i} className="w-full rounded-full bg-mint/70" style={{ height: `${20 + ((i * 37) % 70)}%` }} />
+          ))}
+        </div>
+        <div className="relative flex gap-1">
+          {["w-[22%] bg-brand-400", "w-[30%] bg-mint", "w-[18%] bg-brand-500", "w-[26%] bg-gold/70"].map((c, i) => (
+            <span key={i} className={cn("h-3 rounded", c)} />
+          ))}
+          <span className="absolute -top-10 bottom-0 left-[38%] w-px bg-[#e5533d]" />
+        </div>
+      </div>
+    </div>
+  ),
+  reels: () => (
+    <div className="flex w-full items-end justify-center gap-3">
+      {[
+        { g: "from-brand-500 to-brand-900", r: "-rotate-6", t: "Hook in 3s" },
+        { g: "from-gold/80 to-brand", r: "-translate-y-4", t: "Captions" },
+        { g: "from-brand-400 to-brand-950", r: "rotate-6", t: "Loop" },
+      ].map((p, i) => (
+        <div key={i} className={cn("relative aspect-[9/16] w-[30%] overflow-hidden rounded-[1.4rem] border-4 border-ink bg-gradient-to-b shadow-lift", p.g, p.r)}>
+          <span className="absolute left-1/2 top-[30%] size-10 -translate-x-1/2 rounded-full bg-white/25" />
+          <span className="absolute left-1/2 top-[44%] h-10 w-16 -translate-x-1/2 rounded-t-full bg-white/20" />
+          <span className="absolute inset-x-2 bottom-12 rounded-md bg-white px-1.5 py-1 text-center text-[0.55rem] font-bold uppercase text-ink" style={{ animation: `rise 0.8s ${0.3 + i * 0.2}s both var(--ease-out)` }}>
+            {p.t}
+          </span>
+          <div className="absolute bottom-3 right-2 flex flex-col gap-1.5">
+            <Heart className="size-3.5 fill-white text-white" />
+            <MessageCircle className="size-3.5 text-white" />
+          </div>
+          <span className="absolute bottom-0 left-0 h-1 bg-mint" style={{ width: `${40 + i * 20}%` }} />
+        </div>
+      ))}
+    </div>
+  ),
+  motion: () => (
+    <div className="w-full overflow-hidden rounded-3xl border border-line bg-white shadow-lift">
+      <div className="relative flex aspect-video items-center justify-center bg-[radial-gradient(circle_at_50%_40%,#ffffff,#e3f0e9)]">
+        <span className="absolute size-28 animate-spin-slow rounded-[2rem] border-2 border-dashed border-brand/30" />
+        <span className="relative font-display text-4xl font-semibold tracking-tight text-brand" style={{ animation: "rise 1.2s 0.2s both var(--ease-out)" }}>
+          Motion
+        </span>
+        <span className="absolute right-[22%] top-[24%] size-4 rounded-full bg-gold animate-float" />
+        <span className="absolute bottom-[22%] left-[24%] size-3 rotate-45 bg-brand-500 animate-float [animation-delay:-2s]" />
+      </div>
+      <div className="space-y-2 border-t border-line p-3">
+        {["Position", "Scale", "Opacity"].map((l, r) => (
+          <div key={l} className="flex items-center gap-3">
+            <span className="w-14 font-mono text-[0.55rem] text-muted">{l}</span>
+            <div className="relative h-px flex-1 bg-line">
+              {[10, 35 + r * 8, 70, 92].map((x, i) => (
+                <span key={i} className="absolute top-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-brand" style={{ left: `${x}%` }} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ),
   shield: () => (
     <div className="grid w-full grid-cols-[1fr_1.4fr] items-center gap-5">
       <div className="relative flex aspect-square items-center justify-center">
@@ -596,7 +761,7 @@ export default function ServiceVisual({
 }) {
   return (
     <div aria-hidden="true" className={cn("relative", className)}>
-      <div className="pointer-events-none absolute -inset-10 -z-10 rounded-full bg-mint/50 blur-3xl" />
+      <div className="pointer-events-none absolute -inset-x-2 -inset-y-10 -z-10 rounded-full bg-mint/50 blur-3xl sm:-inset-10" />
       <div className="relative">{scenes[kind]()}</div>
       {tags.map((t, i) => (
         <span

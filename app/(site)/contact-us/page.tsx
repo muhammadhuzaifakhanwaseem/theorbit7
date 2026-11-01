@@ -9,10 +9,12 @@ import FAQ from "@/components/sections/FAQ";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
-import { site } from "@/lib/site";
+import { site, telHref, waHref } from "@/lib/site";
+import { calendlyEmbedUrl, hasCalendly } from "@/lib/calendly";
+import CalendlyInline from "@/components/booking/CalendlyInline";
 import { socialIconFor } from "@/components/ui/SocialIcons";
 
-const title = "Contact The Orbit 7 | Get a Free Consultation & Project Proposal";
+const title = "Contact The Orbit 7 | Book a Free Consultation | Call or WhatsApp";
 const description =
   "Contact The Orbit 7 to discuss your website, app, software, AI or marketing project. Tell us your goals and get a free consultation and a clear, no-obligation proposal.";
 
@@ -83,22 +85,22 @@ export default function ContactPage() {
                     </span>
                   </a>
                 </li>
-                {site.phone && (
-                  <li>
-                    <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="group flex items-center gap-4 rounded-2xl border border-line bg-white p-4 transition-all hover:border-brand/30 hover:shadow-soft">
+                {site.phones.map((p, i) => (
+                  <li key={p}>
+                    <a href={telHref(p)} className="group flex items-center gap-4 rounded-2xl border border-line bg-white p-4 transition-all hover:border-brand/30 hover:shadow-soft">
                       <span className="flex size-11 items-center justify-center rounded-xl bg-brand text-white">
                         <Phone className="size-5" aria-hidden="true" />
                       </span>
                       <span>
-                        <span className="block text-xs text-muted">Call us</span>
-                        <span className="font-medium group-hover:text-brand">{site.phone}</span>
+                        <span className="block text-xs text-muted">{i === 0 ? "Call us" : "Call us (alternate)"}</span>
+                        <span className="font-medium group-hover:text-brand">{p}</span>
                       </span>
                     </a>
                   </li>
-                )}
+                ))}
                 {site.whatsapp && (
                   <li>
-                    <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`} className="group flex items-center gap-4 rounded-2xl border border-line bg-white p-4 transition-all hover:border-brand/30 hover:shadow-soft">
+                    <a href={waHref(site.whatsapp)} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 rounded-2xl border border-line bg-white p-4 transition-all hover:border-brand/30 hover:shadow-soft">
                       <span className="flex size-11 items-center justify-center rounded-xl bg-brand text-white">
                         <MessageCircle className="size-5" aria-hidden="true" />
                       </span>
@@ -149,6 +151,48 @@ export default function ContactPage() {
           </div>
         </Container>
       </section>
+      <section id="book" className="scroll-mt-24 border-t border-line bg-paper py-20 sm:py-24" aria-labelledby="book-heading">
+        <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <Eyebrow>Schedule a call</Eyebrow>
+            <h2 id="book-heading" className="mt-4 text-4xl leading-tight font-semibold sm:text-5xl">
+              Book a free <em>consultation</em>
+            </h2>
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-muted">
+              Choose a time that suits you for a free, no-obligation call about your website, app, AI, SEO or video project.
+            </p>
+            <ul className="mt-8 space-y-3 text-[0.95rem] text-ink-2">
+              {["A specialist who understands your project", "Honest advice on scope, approach and next steps", "A clear written proposal afterwards"].map((t) => (
+                <li key={t} className="flex gap-3">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden="true" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {hasCalendly() ? (
+            <CalendlyInline embedUrl={calendlyEmbedUrl()} />
+          ) : (
+            <div className="flex flex-col justify-center rounded-[1.75rem] border border-line bg-white p-8 sm:p-12">
+              <p className="font-display text-2xl font-semibold">Prefer to talk now?</p>
+              <p className="mt-2 text-muted">Call or message us and we&apos;ll arrange a time that works for you.</p>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {site.phones.map((p) => (
+                  <a key={p} href={telHref(p)} className="flex items-center gap-3 rounded-2xl bg-brand px-5 py-4 font-medium text-white hover:bg-brand-800">
+                    <Phone className="size-5" aria-hidden="true" /> {p}
+                  </a>
+                ))}
+                {site.whatsapp && (
+                  <a href={waHref(site.whatsapp)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-line-strong px-5 py-4 font-medium text-ink-2 hover:border-brand hover:text-brand sm:col-span-2">
+                    <MessageCircle className="size-5 text-brand" aria-hidden="true" /> Message us on WhatsApp
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+        </Container>
+      </section>
+
       <FAQ faqs={faqs} lead="A few things people usually ask before getting in touch." />
     </>
   );

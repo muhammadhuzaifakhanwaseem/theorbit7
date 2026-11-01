@@ -82,7 +82,7 @@ export const mobileServices: Service[] = [
       { q: "Can you build the backend and admin panel too?", a: "Yes. We build the APIs, database, cloud infrastructure and admin dashboard your app needs to operate." },
       { q: "Do you maintain apps after launch?", a: "Yes. We offer ongoing support for OS updates, bug fixes, monitoring and new features." },
     ],
-    related: ["ios-app-development", "android-app-development", "flutter-react-native-development", "ui-ux-design"],
+    related: ["ios-app-development", "android-app-development", "cross-platform-app-development", "ui-ux-design"],
   },
   {
     slug: "ios-app-development",
@@ -90,7 +90,7 @@ export const mobileServices: Service[] = [
     category: "mobile",
     summary:
       "Native Swift and SwiftUI apps for iPhone and iPad that feel truly Apple-grade.",
-    metaTitle: "iOS App Development Company | iPhone & iPad Apps in Swift | The Orbit 7",
+    metaTitle: "iOS App Development Company | The Orbit 7",
     metaDescription:
       "Native iOS app development in Swift and SwiftUI. We design, build and launch high-quality iPhone and iPad apps that follow Apple's guidelines and pass App Store review smoothly.",
     keywords: [
@@ -165,7 +165,7 @@ export const mobileServices: Service[] = [
       { q: "Do you develop for Apple Watch and iPad?", a: "Yes. We build Apple Watch companions, widgets and iPad-optimised layouts alongside iPhone apps." },
       { q: "Will I own the app and the code?", a: "Yes. The app is published under your developer account and all source code is yours." },
     ],
-    related: ["mobile-app-development", "android-app-development", "flutter-react-native-development", "ui-ux-design"],
+    related: ["mobile-app-development", "android-app-development", "cross-platform-app-development", "ui-ux-design"],
   },
   {
     slug: "android-app-development",
@@ -173,7 +173,7 @@ export const mobileServices: Service[] = [
     category: "mobile",
     summary:
       "Kotlin-first Android apps that perform beautifully across thousands of devices.",
-    metaTitle: "Android App Development Company | Kotlin & Jetpack Compose | The Orbit 7",
+    metaTitle: "Android App Development Company | The Orbit 7",
     metaDescription:
       "Native Android app development in Kotlin and Jetpack Compose. Fast, stable apps optimised for every screen size and Android version, launched and managed on Google Play.",
     keywords: [
@@ -248,26 +248,26 @@ export const mobileServices: Service[] = [
       { q: "Can you publish my app on Google Play?", a: "Yes. We prepare the listing, comply with Play policies, configure staged rollouts and manage the release." },
       { q: "Do you build both Android and iOS?", a: "Yes. We build native apps for both platforms or a single cross-platform app, depending on what suits your product." },
     ],
-    related: ["mobile-app-development", "ios-app-development", "flutter-react-native-development", "api-development-integration"],
+    related: ["mobile-app-development", "ios-app-development", "cross-platform-app-development", "api-development-integration"],
   },
   {
-    slug: "flutter-react-native-development",
-    title: "Flutter & React Native Development",
+    slug: "cross-platform-app-development",
+    title: "Cross-Platform App Development",
     category: "mobile",
     summary:
       "One codebase, two app stores — cross-platform apps with native-quality UX.",
-    metaTitle: "Flutter & React Native App Development Company | The Orbit 7",
+    metaTitle: "Cross-Platform App Development Company | The Orbit 7",
     metaDescription:
-      "Cross-platform app development with Flutter and React Native. Launch on iOS and Android from one codebase with native-quality performance, faster delivery and lower maintenance.",
+      "Cross-platform app development for iOS and Android from one codebase. We compare Flutter, React Native and Kotlin Multiplatform and build native-quality apps faster.",
     keywords: [
       "flutter app development",
       "react native app development",
       "cross-platform app development company",
-      "flutter developers",
-      "react native developers",
+      "multi-platform app development",
+      "kotlin multiplatform",
     ],
     eyebrow: "Cross-Platform App Development",
-    h1: "Flutter & React Native Apps — One Codebase, Two Platforms",
+    h1: "Cross-Platform App Development — One Codebase, Two Platforms",
     heroLead:
       "Ship to iOS and Android together with a single, well-architected codebase that still looks, feels and performs like a native app.",
     visual: "phone",

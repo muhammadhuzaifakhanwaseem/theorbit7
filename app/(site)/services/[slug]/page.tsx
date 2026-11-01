@@ -17,6 +17,9 @@ import { getCategory, getService, relatedServices, serviceHref, services, servic
 import { projects } from "@/data/projects";
 import { buildMetadata } from "@/lib/seo";
 import { inlineTitle } from "@/lib/text";
+import { cn } from "@/lib/utils";
+import BookCallButton from "@/components/booking/BookCallButton";
+import { OfferBanner, Packages, StickySampleButton, ToolsGrid, VideoContact } from "@/components/service/VideoSections";
 import { breadcrumbSchema, faqSchema, serviceSchema, webPageSchema } from "@/lib/schema";
 
 export const dynamicParams = false;
@@ -44,12 +47,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   const category = getCategory(s.category);
   const t = inlineTitle(s.title);
+  const isVideo = s.category === "video";
   const related = relatedServices(s);
   const siblings = servicesIn(s.category).filter((x) => x.slug !== s.slug);
   const work = projects.filter((p) => p.services.includes(s.slug)).slice(0, 2);
   const crumbs = [
     { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
+    s.category === "video" ? { name: "Video Editing", path: "/video-editing" } : { name: "Services", path: "/services" },
     { name: s.title, path: serviceHref(s.slug) },
   ];
 
@@ -96,17 +100,21 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 {s.heroLead}
               </p>
               <div className="fade-late mt-9 flex flex-wrap gap-3" style={{ ["--delay" as string]: "0.42s" }}>
-                <Button href="/contact-us" size="lg">
-                  Get a free consultation
-                </Button>
-                <Button href="#overview" variant="secondary" size="lg" icon={false}>
-                  Learn more
+                {isVideo ? (
+                  <Button href="#free-sample" size="lg">
+                    {s.primaryCta ?? "Get a free sample edit"}
+                  </Button>
+                ) : (
+                  <BookCallButton size="lg">Book a free consultation</BookCallButton>
+                )}
+                <Button href={s.packages ? "#packages" : "#overview"} variant="secondary" size="lg" icon={false}>
+                  {s.packages ? "See packages" : "Learn more"}
                 </Button>
               </div>
               <ul className="fade-late mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-2" style={{ ["--delay" as string]: "0.55s" }}>
-                {s.benefits.slice(0, 3).map((b) => (
-                  <li key={b.title} className="inline-flex items-center gap-2">
-                    <Check className="size-4 text-brand" aria-hidden="true" /> {b.title}
+                {(s.trust ?? s.benefits.slice(0, 3).map((b) => b.title)).map((b) => (
+                  <li key={b} className="inline-flex items-center gap-2">
+                    <Check className="size-4 text-brand" aria-hidden="true" /> {b}
                   </li>
                 ))}
               </ul>
@@ -214,6 +222,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </Container>
       </section>
 
+      {s.offer && <OfferBanner offer={s.offer} />}
+
       {/* ─────────── Process ─────────── */}
       <section className="relative overflow-hidden bg-brand py-20 text-white noise sm:py-28" aria-labelledby="process-heading">
         <div aria-hidden="true" className="pointer-events-none absolute -left-40 -bottom-40 size-[36rem] rounded-full border border-white/10" />
@@ -228,7 +238,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             }
             lead="A proven, transparent methodology — so you always know what is happening, what comes next and why."
           />
-          <ol className="mt-14 grid gap-4 md:grid-cols-5">
+          <ol className={cn("mt-14 grid gap-4", s.process.length === 4 ? "md:grid-cols-4" : "md:grid-cols-5")}>
             {s.process.map((p, i) => (
               <li key={p.title} data-reveal style={{ ["--d" as string]: i * 90 }} className="glass-dark relative rounded-3xl p-6">
                 <div className="flex items-center gap-3">
@@ -244,6 +254,19 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </ol>
         </Container>
       </section>
+
+      {s.packages && <Packages packages={s.packages} note={s.packagesNote} />}
+
+      {!isVideo && (
+        <section className="border-b border-line py-10" aria-label="Book a consultation">
+          <Container className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
+            <p className="max-w-2xl font-display text-xl font-semibold tracking-tight sm:text-2xl">
+              Planning {t}? <span className="font-normal text-brand-500">Get expert advice in a free 30-minute call.</span>
+            </p>
+            <BookCallButton variant="secondary">Schedule a call</BookCallButton>
+          </Container>
+        </section>
+      )}
 
       {/* ─────────── Deliverables + tech ─────────── */}
       <section className="py-20 sm:py-28" aria-labelledby="deliverables-heading">
@@ -271,19 +294,32 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 size-72 animate-spin-slower rounded-full border border-dashed border-brand/20" />
             <Eyebrow>Technology</Eyebrow>
             <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">
-              Tools & <em>platforms</em>
+              {s.tools ? (
+                <>
+                  Industry-standard <em>tools</em>
+                </>
+              ) : (
+                <>
+                  Tools & <em>platforms</em>
+                </>
+              )}
             </h2>
             <p className="mt-4 leading-relaxed text-muted">
-              We select the stack for your goals, budget and long-term maintainability. Typical tools for{" "}
-              {t} include:
+              {s.tools
+                ? "Professional software for editing, color, audio, motion and thumbnails — the same tools used across the industry."
+                : `We select the stack for your goals, budget and long-term maintainability. Typical tools for ${t} include:`}
             </p>
-            <ul className="mt-8 flex flex-wrap gap-2.5">
-              {s.tech.map((t) => (
-                <li key={t} className="rounded-full bg-white px-4 py-2 text-sm font-medium text-ink-2 shadow-soft ring-1 ring-black/5 transition-transform duration-300 hover:-translate-y-0.5">
-                  {t}
-                </li>
-              ))}
-            </ul>
+            {s.tools ? (
+              <ToolsGrid tools={s.tools} />
+            ) : (
+              <ul className="mt-8 flex flex-wrap gap-2.5">
+                {s.tech.map((t) => (
+                  <li key={t} className="rounded-full bg-white px-4 py-2 text-sm font-medium text-ink-2 shadow-soft ring-1 ring-black/5 transition-transform duration-300 hover:-translate-y-0.5">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </Container>
       </section>
@@ -324,8 +360,18 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               }
               lead="One accountable partner across strategy, design, engineering and growth — focused on outcomes, not just outputs."
             />
+            {s.stats && (
+              <dl data-reveal className="mt-10 grid max-w-md grid-cols-2 gap-4">
+                {s.stats.map((st) => (
+                  <div key={st.label} className="rounded-2xl border border-line bg-white p-5">
+                    <dd className="font-display text-3xl font-semibold tracking-tight text-brand">{st.value}</dd>
+                    <dt className="mt-1 text-sm text-muted">{st.label}</dt>
+                  </div>
+                ))}
+              </dl>
+            )}
             <div data-reveal className="mt-10">
-              <Button href="/contact-us">Talk to a specialist</Button>
+              {isVideo ? <Button href="#free-sample">Get a free sample</Button> : <BookCallButton>Talk to a specialist</BookCallButton>}
             </div>
           </div>
           <ul className="grid gap-5 sm:grid-cols-2">
@@ -419,6 +465,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </Container>
       </section>
 
+      {isVideo ? (
+        <>
+          <VideoContact serviceTitle={s.title} services={services.map((x) => x.title)} />
+          <StickySampleButton />
+        </>
+      ) : (
       <CTA
         eyebrow={`Start your ${t} project`}
         title={
@@ -429,6 +481,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         text={`Share a little about your business and what you want to achieve. We'll reply with practical recommendations and a clear proposal for your ${t} project.`}
         secondary={{ label: "All services", href: "/services" }}
       />
+      )}
     </>
   );
 }

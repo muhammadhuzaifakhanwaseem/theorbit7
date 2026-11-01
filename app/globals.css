@@ -642,3 +642,12 @@ details[open] .faq-body {
 .editor-figure-delete:hover {
   background: #fbeae6;
 }
+
+@keyframes travel-x {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
+}

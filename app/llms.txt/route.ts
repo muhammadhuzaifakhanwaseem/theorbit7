@@ -1,6 +1,7 @@
 import { categories, servicesIn } from "@/data/services";
 import { homeFaqs } from "@/data/content";
 import { getLatestPosts } from "@/lib/blog/db";
+import { cities, localServicePages, locationHref } from "@/data/locations";
 import { site, absoluteUrl } from "@/lib/site";
 
 export const revalidate = 300;
@@ -21,6 +22,9 @@ export async function GET() {
     `- [Our work](${absoluteUrl("/portfolio")}): representative projects`,
     `- [Contact](${absoluteUrl("/contact-us")}): request a free consultation (email: ${site.email})`,
     `- [Blog](${absoluteUrl("/blogs")}): guides and insights on web, apps, AI and digital marketing`,
+    `- [Video editing](${absoluteUrl("/video-editing")}): podcast, YouTube, short-form, corporate and ad video editing`,
+    `- [Locations](${absoluteUrl("/locations")}): markets we serve remotely`,
+    `- Phone: ${site.phones.join(" / ")}`,
     "",
   ];
   for (const c of categories) {
@@ -30,6 +34,10 @@ export async function GET() {
     }
     lines.push("");
   }
+  lines.push("## Locations served", "");
+  for (const c of cities) lines.push(`- [${c.name}, ${c.country}](${absoluteUrl(locationHref(c.slug))}): ${c.lead}`);
+  for (const p of localServicePages) lines.push(`- [${p.title}](${absoluteUrl(locationHref(p.city, p.slug))})`);
+  lines.push("");
   if (posts.length) {
     lines.push("## Latest articles", "");
     for (const p of posts) lines.push(`- [${p.title}](${absoluteUrl(`/blogs/${p.slug}`)}): ${p.excerpt}`);

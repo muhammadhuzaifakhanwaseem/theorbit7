@@ -26,6 +26,14 @@ export default async function InquiryPage({ params }: { params: Promise<{ id: st
     ["Received", it.createdAt ? fmt.format(new Date(it.createdAt)) : "—"],
     ["Country", it.country || "—"],
     ["Page", it.referer || "—"],
+    ...(it.details
+      ? ([
+          ["Podcast / channel", it.details.channel || "—"],
+          ["Needs", it.details.need || "—"],
+          ["Episodes per month", it.details.episodes || "—"],
+          ["Raw footage", it.details.footage ? <a key="f" href={it.details.footage} target="_blank" rel="noreferrer noopener" className="text-brand hover:underline">{it.details.footage}</a> : "—"],
+        ] as [string, React.ReactNode][])
+      : []),
   ];
 
   return (
@@ -49,7 +57,7 @@ export default async function InquiryPage({ params }: { params: Promise<{ id: st
       <div className="mt-8 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
         <section className="rounded-2xl border border-line bg-white p-6" aria-labelledby="msg">
           <h2 id="msg" className="text-sm font-medium text-muted">Message</h2>
-          <p className="mt-3 whitespace-pre-wrap leading-relaxed text-ink">{it.message}</p>
+          <p className="mt-3 whitespace-pre-wrap leading-relaxed text-ink">{it.message || <span className="text-muted">No message</span>}</p>
           <dl className="mt-8 grid gap-x-6 gap-y-4 border-t border-line pt-6 sm:grid-cols-2">
             {rows.map(([k, v]) => (
               <div key={k} className="min-w-0">

@@ -133,7 +133,7 @@ export default function AboutPage() {
             eyebrow="What we do"
             title={
               <span id="disciplines-heading">
-                Five disciplines, <em>one team</em>
+                Every discipline, <em>one team</em>
               </span>
             }
             lead="Engage us for a single service or combine them into one joined-up programme."

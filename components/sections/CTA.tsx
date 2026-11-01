@@ -1,7 +1,8 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import BookCallButton from "@/components/booking/BookCallButton";
 import Eyebrow from "@/components/ui/Eyebrow";
-import { site } from "@/lib/site";
+import { site, telHref } from "@/lib/site";
 
 export default function CTA({
   eyebrow = "Let's talk",
@@ -11,7 +12,7 @@ export default function CTA({
     </>
   ),
   text = "Tell us about your goals. We'll come back with honest advice, a recommended approach and a clear proposal — no obligation.",
-  primary = { label: "Book a free consultation", href: "/contact-us" },
+  primary = { label: "Book a free consultation", href: "" },
   secondary = { label: "Explore services", href: "/services" },
 }: {
   eyebrow?: string;
@@ -43,18 +44,32 @@ export default function CTA({
             <h2 className="mt-5 text-4xl leading-[1.04] font-semibold sm:text-5xl lg:text-6xl">{title}</h2>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">{text}</p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Button href={primary.href} variant="light" size="lg">
-                {primary.label}
-              </Button>
+              {primary.href ? (
+                <Button href={primary.href} variant="light" size="lg">
+                  {primary.label}
+                </Button>
+              ) : (
+                <BookCallButton variant="light" size="lg">
+                  {primary.label}
+                </BookCallButton>
+              )}
               <Button href={secondary.href} variant="ghost-light" size="lg">
                 {secondary.label}
               </Button>
             </div>
             <p className="mt-8 text-sm text-white/60">
-              Prefer email?{" "}
+              Prefer email or phone?{" "}
               <a href={`mailto:${site.email}`} className="text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">
                 {site.email}
               </a>
+              {site.phones.map((p) => (
+                <span key={p}>
+                  {" · "}
+                  <a href={telHref(p)} className="whitespace-nowrap text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">
+                    {p}
+                  </a>
+                </span>
+              ))}
             </p>
           </div>
         </div>

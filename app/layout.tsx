@@ -4,6 +4,8 @@ import "@fontsource-variable/manrope";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 import RevealObserver from "@/components/ui/RevealObserver";
+import BookingProvider from "@/components/booking/BookingProvider";
+import { calendlyEmbedUrl, hasCalendly } from "@/lib/calendly";
 import JsonLd from "@/components/ui/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -34,7 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className="antialiased">
       <body className="flex min-h-dvh flex-col">
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
-        {children}
+        <BookingProvider embedUrl={hasCalendly() ? calendlyEmbedUrl() : null}>{children}</BookingProvider>
         <RevealObserver />
       </body>
     </html>
