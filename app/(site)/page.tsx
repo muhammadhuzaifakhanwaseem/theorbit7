@@ -21,7 +21,7 @@ import { site } from "@/lib/site";
 
 const title = "The Orbit 7 | Digital Agency & Software House — Web, Apps, AI & SEO";
 const description =
-  "The Orbit 7 is a full-service digital agency and software house. Website development, mobile apps, custom software, AI automation, SEO, Google Ads, social media and branding — one expert team.";
+  "Build and scale your business with The Orbit 7. We engineer high-performance websites, mobile apps, custom software, AI automation, and ROI-driven marketing.";
 
 /** Re-rendered at most every 5 minutes (and immediately on publish) so the latest blog posts stay current. */
 export const revalidate = 300;
