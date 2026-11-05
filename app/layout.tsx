@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   publisher: site.name,
   formatDetection: { telephone: false },
   category: "technology",
+  verification: { google: site.analytics.googleSiteVerification },
 };
 
 export const viewport: Viewport = {

@@ -11,7 +11,7 @@ export function organizationSchema() {
     name: site.name,
     legalName: site.legalName,
     url: site.url,
-    logo: absoluteUrl("/icon.svg"),
+    logo: absoluteUrl("/brand/the-orbit-7-icon.png"),
     description: site.description,
     email: site.email,
     ...(site.phone ? { telephone: site.phone } : {}),

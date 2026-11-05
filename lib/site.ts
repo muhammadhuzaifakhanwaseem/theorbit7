@@ -30,6 +30,12 @@ export const site = {
     addressCountry: string;
   },
   social: [{ label: "Instagram", href: "https://www.instagram.com/theorbit.7/" }],
+  /** Analytics & verification (loaded on public pages only, never in /admin). */
+  analytics: {
+    googleSiteVerification: "mdyxPQ2fTc7rhMSWsJjjCLUP_yHieMplc8jbmEXlvSI",
+    ga4Id: "G-6BT3MVBSF7",
+    clarityId: "z8h4n9bo7j",
+  },
 } as const;
 
 export const telHref = (n: string) => `tel:${n.replace(/[^\d+]/g, "")}`;

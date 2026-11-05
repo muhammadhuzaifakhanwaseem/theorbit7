@@ -48,7 +48,7 @@ export function postJsonLd(post: PublicPostFull) {
       author: post.author
         ? { "@type": "Person", name: post.author.name, ...(post.author.role ? { jobTitle: post.author.role } : {}) }
         : { "@type": "Organization", name: site.name, url: site.url },
-      publisher: { "@type": "Organization", "@id": `${site.url}/#organization`, name: site.name, logo: { "@type": "ImageObject", url: absoluteUrl("/icon.svg") } },
+      publisher: { "@type": "Organization", "@id": `${site.url}/#organization`, name: site.name, logo: { "@type": "ImageObject", url: absoluteUrl("/brand/the-orbit-7-icon.png"), width: 1024, height: 1024 } },
       ...(post.category ? { articleSection: post.category.name } : {}),
       keywords: [post.focusKeyword, ...post.secondaryKeywords].filter(Boolean).join(", ") || undefined,
       wordCount: post.wordCount,
