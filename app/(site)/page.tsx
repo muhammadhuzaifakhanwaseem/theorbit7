@@ -198,8 +198,8 @@ export default function HomePage() {
                 src={officeEditSuite}
                 alt="The Orbit 7 team planning at the whiteboard while editors grade footage"
                 placeholder="blur"
-                quality={78}
-                sizes="(min-width: 1024px) 34vw, 92vw"
+                quality={85}
+                sizes="(min-width: 1024px) 62vw, 170vw"
                 className="aspect-[4/3] w-full object-cover object-[68%_50%] sm:aspect-[16/10] lg:aspect-[4/3]"
               />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-brand/55 via-transparent to-transparent" />
