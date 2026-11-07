@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import HomeHero from "@/components/home/HomeHero";
+import CeoSection from "@/components/home/CeoSection";
+import officeStudio from "@/assets/images/office-studio.jpg";
+import officeEditSuite from "@/assets/images/office-edit-suite.jpg";
 import ServicesExplorer from "@/components/home/ServicesExplorer";
 import ProcessScroll from "@/components/home/ProcessScroll";
 import LatestPosts from "@/components/home/LatestPosts";
@@ -87,7 +91,12 @@ export default function HomePage() {
       </section>
 
       {/* ─────────── About intro ─────────── */}
-      <section className="relative overflow-hidden bg-brand py-24 text-white noise sm:py-32" aria-labelledby="about-heading">
+      <section className="relative isolate overflow-hidden bg-brand py-24 text-white noise sm:py-32" aria-labelledby="about-heading">
+        {/* Studio photograph, toned into the brand green */}
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
+          <Image src={officeStudio} alt="" fill placeholder="blur" quality={70} sizes="100vw" className="object-cover object-[60%_50%] opacity-50 mix-blend-luminosity" />
+          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgb(22_62_51/0.95)_0%,rgb(22_62_51/0.84)_45%,rgb(22_62_51/0.55)_100%)]" />
+        </div>
         <div aria-hidden="true" className="pointer-events-none absolute -right-60 -top-60 size-[50rem] rounded-full border border-white/[0.06]" />
         <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-32 size-[34rem] rounded-full border border-white/[0.06]" />
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 left-1/4 size-[30rem] rounded-full bg-brand-500/40 blur-[100px]" />
@@ -139,6 +148,8 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <CeoSection />
+
       {/* ─────────── Featured work ─────────── */}
       <section className="py-24 sm:py-32" aria-labelledby="work-heading">
         <Container>
@@ -182,6 +193,24 @@ export default function HomePage() {
             <div data-reveal className="mt-10">
               <Button href="/contact-us">Book a discovery call</Button>
             </div>
+            <figure data-reveal className="relative mt-12 overflow-hidden rounded-[2rem] shadow-[0_30px_70px_-35px_rgb(22_62_51/0.5)] ring-1 ring-black/5">
+              <Image
+                src={officeEditSuite}
+                alt="The Orbit 7 team planning at the whiteboard while editors grade footage"
+                placeholder="blur"
+                quality={78}
+                sizes="(min-width: 1024px) 34vw, 92vw"
+                className="aspect-[4/3] w-full object-cover object-[68%_50%] sm:aspect-[16/10] lg:aspect-[4/3]"
+              />
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-brand/55 via-transparent to-transparent" />
+              <figcaption className="absolute inset-x-4 bottom-4 flex flex-wrap gap-2">
+                {["Plan", "Design", "Build", "Edit", "Grow"].map((t) => (
+                  <span key={t} className="rounded-full bg-white/85 px-3 py-1 font-mono text-[0.68rem] uppercase tracking-widest text-brand backdrop-blur">
+                    {t}
+                  </span>
+                ))}
+              </figcaption>
+            </figure>
           </div>
           <ProcessScroll steps={processSteps} />
         </Container>

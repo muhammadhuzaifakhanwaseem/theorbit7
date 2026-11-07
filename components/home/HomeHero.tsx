@@ -10,13 +10,12 @@ import HeroBackdrop from "@/components/home/HeroBackdrop";
 export default function HomeHero() {
   return (
     <section className="relative isolate overflow-hidden pt-32 sm:pt-40" aria-labelledby="hero-title">
-      {/* Office photo backdrop (renders only when public/hero/office.* exists) */}
+      {/* Studio photo backdrop */}
       <HeroBackdrop />
       {/* Background atmosphere */}
       <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <div className="bg-grid mask-radial absolute inset-0 opacity-70" />
-        <div className="absolute -top-40 left-1/2 h-[42rem] w-[70rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(207_231_218/0.9),transparent)]" />
-        <div className="absolute right-[-10rem] top-1/3 size-[30rem] rounded-full bg-sand blur-3xl" />
+        <div className="bg-grid mask-radial absolute inset-0 opacity-30" />
+        <div className="absolute -top-40 left-1/2 h-[42rem] w-[70rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(207_231_218/0.3),transparent)]" />
       </div>
 
       <Container className="grid items-center gap-12 lg:grid-cols-[1.08fr_1fr] lg:gap-6">

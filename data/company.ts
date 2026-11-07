@@ -16,6 +16,16 @@ export interface TeamMember {
   linkedin?: string;
 }
 
+/**
+ * CEO feature on the homepage. Add the CEO's full name to show it in the
+ * "Meet our CEO" section (left empty, the section shows the title only).
+ */
+export const ceo = {
+  name: "",
+  role: "Chief Executive Officer",
+  linkedin: "",
+};
+
 /** Leadership / team profiles. Example: { name: "…", role: "Founder & CEO", bio: "…" } */
 export const leadership: TeamMember[] = [];
 
