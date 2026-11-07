@@ -5,10 +5,13 @@ import HeroOrbit from "@/components/visuals/HeroOrbit";
 import Marquee from "@/components/ui/Marquee";
 import { categories, services } from "@/data/services";
 import BookCallButton from "@/components/booking/BookCallButton";
+import HeroBackdrop from "@/components/home/HeroBackdrop";
 
 export default function HomeHero() {
   return (
     <section className="relative isolate overflow-hidden pt-32 sm:pt-40" aria-labelledby="hero-title">
+      {/* Office photo backdrop (renders only when public/hero/office.* exists) */}
+      <HeroBackdrop />
       {/* Background atmosphere */}
       <div aria-hidden="true" className="absolute inset-0 -z-10">
         <div className="bg-grid mask-radial absolute inset-0 opacity-70" />
