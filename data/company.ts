@@ -21,13 +21,20 @@ export interface TeamMember {
  * "Meet our CEO" section (left empty, the section shows the title only).
  */
 export const ceo = {
-  name: "",
+  name: "Muhammad Naveed",
   role: "Chief Executive Officer",
   linkedin: "",
 };
 
 /** Leadership / team profiles. Example: { name: "…", role: "Founder & CEO", bio: "…" } */
-export const leadership: TeamMember[] = [];
+export const leadership: TeamMember[] = [
+  {
+    name: "Muhammad Naveed",
+    role: "Chief Executive Officer",
+    bio: "Muhammad Naveed leads The Orbit 7, setting the direction across strategy, design, engineering, marketing and video, and making sure every client is looked after by one accountable team.",
+    photo: "/team/muhammad-naveed.webp",
+  },
+];
 
 /** Founder's letter. Set to an object to publish the page. */
 export const foundersLetter: null | {

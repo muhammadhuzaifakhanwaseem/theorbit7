@@ -15,7 +15,7 @@ const styles: Record<Variant, string> = {
 };
 
 /**
- * "Book a free consultation" — opens the Calendly modal when a Calendly URL is configured,
+ * "Book a free consultation" — opens the Cal.com modal when a booking URL is configured,
  * otherwise links to the contact page so the CTA always works.
  */
 export default function BookCallButton({

@@ -99,10 +99,10 @@ sitemap, llms.txt and schema all pick it up automatically.
 - **Migrations**: `npm run db:migrate` creates all indexes and default categories/author (idempotent). The app also
   runs this setup automatically on first use, so nothing is required on Vercel.
 
-## Booking (Calendly)
+## Booking (Cal.com)
 
-- Set `calendlyUrl` in `lib/site.ts` (or the `NEXT_PUBLIC_CALENDLY_URL` env var), e.g. `https://calendly.com/your-name/30min`.
-- With a URL: every "Book a free consultation" button opens an on-brand modal with the Calendly scheduler, and the
+- `bookingUrl` in `lib/site.ts` is `https://cal.com/theorbit7` (override with the `NEXT_PUBLIC_BOOKING_URL` env var).
+- With a URL: every "Book a free consultation" button opens an on-brand modal with the Cal.com scheduler, and the
   contact page shows an inline scheduler (loaded only when scrolled into view). Without a URL: buttons link to
   `/contact-us#book`, which shows the phone numbers and WhatsApp.
 
@@ -114,7 +114,7 @@ the sitemap automatically until you add real content.
 
 ## Before going live
 
-1. **Contact details** live in `lib/site.ts` (email, `phones`, WhatsApp, Calendly URL, optional postal address, social URLs).
+1. **Contact details** live in `lib/site.ts` (email, `phones`, WhatsApp, Cal.com booking URL, optional postal address, social URLs).
    They appear automatically in the footer, contact page, schema and llms.txt.
 2. **Contact form storage**: submissions are saved to MongoDB (`MONGODB_URI`, provided by the Vercel → MongoDB Atlas
    integration) in database `theorbit7` (override with `MONGODB_DB`), collection `submissions`. View them in

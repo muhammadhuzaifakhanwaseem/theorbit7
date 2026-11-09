@@ -16,11 +16,11 @@ export const site = {
   phone: "+92 323 6964669" as string,
   whatsapp: "+92 323 6964669" as string,
   /**
-   * Calendly scheduling link, e.g. "https://calendly.com/your-name/30min".
-   * Leave empty until you have one — booking buttons then fall back to the contact page.
-   * Can also be set with the NEXT_PUBLIC_CALENDLY_URL environment variable.
+   * Cal.com booking link. Booking buttons open it in an on-brand modal.
+   * Override with the NEXT_PUBLIC_BOOKING_URL environment variable; set it to an
+   * empty string to fall back to the contact page.
    */
-  calendlyUrl: (process.env.NEXT_PUBLIC_CALENDLY_URL ?? "") as string,
+  bookingUrl: (process.env.NEXT_PUBLIC_BOOKING_URL ?? "https://cal.com/theorbit7") as string,
   // Add a postal address to enable richer LocalBusiness data.
   address: null as null | {
     streetAddress: string;

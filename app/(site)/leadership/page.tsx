@@ -53,7 +53,7 @@ export default function LeadershipPage() {
                 <li key={m.name} data-reveal style={{ ["--d" as string]: (i % 3) * 80 }} className="overflow-hidden rounded-[1.75rem] border border-line bg-white">
                   <div className="relative aspect-[4/5] bg-mint-100">
                     {m.photo ? (
-                      <Image src={m.photo} alt={`${m.name}, ${m.role}`} fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" />
+                      <Image src={m.photo} alt={`${m.name}, ${m.role}`} fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover object-[50%_22%]" />
                     ) : (
                       <span className="absolute inset-0 flex items-center justify-center font-display text-6xl font-semibold text-brand/30">
                         {m.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}

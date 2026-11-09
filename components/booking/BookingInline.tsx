@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 
-/** Inline Calendly scheduler that only loads when scrolled near (protects page speed). */
-export default function CalendlyInline({ embedUrl, title = "Schedule a call with The Orbit 7" }: { embedUrl: string; title?: string }) {
+/** Inline Cal.com scheduler that only loads when scrolled near (protects page speed). */
+export default function BookingInline({ embedUrl, title = "Schedule a call with The Orbit 7" }: { embedUrl: string; title?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [loaded, setLoaded] = useState(false);

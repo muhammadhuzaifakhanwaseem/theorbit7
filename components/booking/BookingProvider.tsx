@@ -11,7 +11,7 @@ const BookingContext = createContext<Ctx>({ open: () => {}, enabled: false });
 export const useBooking = () => useContext(BookingContext);
 
 /**
- * Site-wide Calendly booking modal. The Calendly iframe is only created when a
+ * Site-wide Cal.com booking modal. The iframe is only created when a
  * visitor opens the modal, so it never affects page load performance.
  */
 export default function BookingProvider({ embedUrl, children }: { embedUrl: string | null; children: React.ReactNode }) {

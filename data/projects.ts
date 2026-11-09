@@ -6,7 +6,12 @@
  * studies (add `client`, `results` and real imagery) before presenting them as
  * named client work.
  */
+import type { StaticImageData } from "next/image";
 import type { VisualKind } from "./services/types";
+import imgMarketplace from "@/assets/projects/multi-vendor-marketplace.jpg";
+import imgClinic from "@/assets/projects/clinic-booking-app.jpg";
+import imgErp from "@/assets/projects/distribution-erp.jpg";
+import imgAi from "@/assets/projects/ai-support-assistant.jpg";
 
 export interface Project {
   slug: string;
@@ -19,6 +24,8 @@ export interface Project {
   services: string[];
   visual: VisualKind;
   tone: "forest" | "mint" | "sand" | "ink";
+  /** Optional showcase image (replaces the illustrated visual on cards). */
+  image?: { src: StaticImageData; alt: string };
 }
 
 export const projects: Project[] = [
@@ -34,6 +41,7 @@ export const projects: Project[] = [
     services: ["ecommerce-development", "ui-ux-design", "seo-services"],
     visual: "cart",
     tone: "forest",
+    image: { src: imgMarketplace, alt: "Velora fashion marketplace storefront with product grid and filters" },
   },
   {
     slug: "clinic-booking-app",
@@ -47,6 +55,7 @@ export const projects: Project[] = [
     services: ["mobile-app-development", "cross-platform-app-development", "ui-ux-design"],
     visual: "phone",
     tone: "mint",
+    image: { src: imgClinic, alt: "Medora clinic booking app on two phones beside the clinic admin dashboard" },
   },
   {
     slug: "distribution-erp",
@@ -60,6 +69,7 @@ export const projects: Project[] = [
     services: ["erp-development", "custom-web-application-development", "api-development-integration"],
     visual: "dashboard",
     tone: "sand",
+    image: { src: imgErp, alt: "Nexora Supply ERP dashboard on a desktop and the B2B wholesale ordering portal on a laptop" },
   },
   {
     slug: "ai-support-assistant",
@@ -73,6 +83,7 @@ export const projects: Project[] = [
     services: ["ai-application-development", "ai-automation", "api-development-integration"],
     visual: "ai",
     tone: "ink",
+    image: { src: imgAi, alt: "ARIA AI support assistant dashboard with knowledge base, analytics and WhatsApp conversation" },
   },
   {
     slug: "real-estate-growth",

@@ -4,7 +4,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import BookCallButton from "@/components/booking/BookCallButton";
 import { site, telHref } from "@/lib/site";
 
-/** Homepage consultation band — Calendly CTA plus direct phone numbers. */
+/** Homepage consultation band — Cal.com CTA plus direct phone numbers. */
 export default function BookingBand() {
   return (
     <section className="py-16 sm:py-20" aria-labelledby="book-heading">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import ServiceVisual from "@/components/visuals/ServiceVisual";
@@ -20,15 +21,30 @@ export default function ProjectCard({ project, priority = false, className }: { 
       className={cn("group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-line bg-white transition-shadow duration-500 hover:shadow-lift", className)}
       aria-labelledby={`p-${project.slug}`}
     >
-      <div className={cn("relative aspect-[16/11] overflow-hidden", toneBg[project.tone])}>
-        <div className="absolute inset-0 flex items-center justify-center p-8 transition-transform duration-700 ease-premium group-hover:scale-[1.04] sm:p-12">
-          <ServiceVisual kind={project.visual} className="w-full max-w-md" />
-        </div>
-        <span className="glass absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-medium text-ink-2">{project.type}</span>
+      <div className={cn("relative aspect-[43/24] overflow-hidden", toneBg[project.tone])}>
+        {project.image ? (
+          <Image
+            src={project.image.src}
+            alt={project.image.alt}
+            fill
+            placeholder="blur"
+            quality={85}
+            priority={priority}
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center p-8 transition-transform duration-700 ease-premium group-hover:scale-[1.04] sm:p-10">
+            <ServiceVisual kind={project.visual} className="w-full max-w-md" />
+          </div>
+        )}
+        {!project.image && <span className="glass absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-medium text-ink-2">{project.type}</span>}
         {priority && <span className="sr-only">Featured</span>}
       </div>
       <div className="flex flex-1 flex-col p-6 sm:p-7">
-        <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-brand-500">{project.sector}</p>
+        <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-brand-500">
+          {project.image ? `${project.type} · ${project.sector}` : project.sector}
+        </p>
         <h3 id={`p-${project.slug}`} className="mt-2 text-xl font-semibold sm:text-2xl">
           {project.title}
         </h3>

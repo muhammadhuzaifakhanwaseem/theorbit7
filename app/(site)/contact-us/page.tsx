@@ -10,8 +10,8 @@ import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { site, telHref, waHref } from "@/lib/site";
-import { calendlyEmbedUrl, hasCalendly } from "@/lib/calendly";
-import CalendlyInline from "@/components/booking/CalendlyInline";
+import { bookingEmbedUrl, hasBooking } from "@/lib/booking";
+import BookingInline from "@/components/booking/BookingInline";
 import { socialIconFor } from "@/components/ui/SocialIcons";
 
 const title = "Contact The Orbit 7 | Book a Free Consultation | Call or WhatsApp";
@@ -170,8 +170,8 @@ export default function ContactPage() {
               ))}
             </ul>
           </div>
-          {hasCalendly() ? (
-            <CalendlyInline embedUrl={calendlyEmbedUrl()} />
+          {hasBooking() ? (
+            <BookingInline embedUrl={bookingEmbedUrl()} />
           ) : (
             <div className="flex flex-col justify-center rounded-[1.75rem] border border-line bg-white p-8 sm:p-12">
               <p className="font-display text-2xl font-semibold">Prefer to talk now?</p>
