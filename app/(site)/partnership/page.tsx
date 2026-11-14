@@ -11,11 +11,16 @@ import { categories } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, webPageSchema } from "@/lib/schema";
 
-const title = "Partnerships | White-Label & Agency Partner Program | The Orbit 7";
+const title = "Technology Partnerships & Agency Partners | The Orbit 7";
 const description =
-  "Partner with The Orbit 7: white-label design, development, SEO and video editing for agencies, plus technology, referral and strategic partnerships.";
+  "Technology partnerships with The Orbit 7: become a technology partner, white-label agency partner or strategic business partner for development, SEO and video.";
 
-export const metadata = buildMetadata({ title, description, path: "/partnership" });
+export const metadata = buildMetadata({
+  title,
+  description,
+  path: "/partnership",
+  keywords: ["technology partnerships", "technology partner", "strategic business partnerships", "agency partnerships"],
+});
 
 const faqs = [
   { q: "What does white-label mean?", a: "We deliver work under your agency's brand. Your client relationship stays yours; we never contact your clients directly unless you ask us to." },
@@ -34,8 +39,8 @@ export default function PartnershipPage() {
       <JsonLd data={[webPageSchema({ name: title, path: "/partnership", description }), breadcrumbSchema(crumbs), faqSchema(faqs)]} />
       <PageHero
         eyebrow="Partnerships"
-        title="Grow together with a reliable *delivery partner.*"
-        lead="Agencies, technology companies and consultants partner with us to offer more services, deliver more capacity and serve their clients better."
+        title="Technology partnerships built to *grow together.*"
+        lead="Agencies, technology companies and consultants choose us as a technology partner, through agency partnerships and strategic business partnerships, to offer more services and serve their clients better."
         crumbs={crumbs}
       >
         <BookCallButton size="lg">Discuss a partnership</BookCallButton>

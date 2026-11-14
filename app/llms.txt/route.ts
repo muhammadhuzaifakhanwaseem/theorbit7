@@ -14,7 +14,7 @@ export async function GET() {
     "",
     `> ${site.description}`,
     "",
-    `${site.name} is a full-service digital agency and software house offering web development, mobile app development, custom software and AI, digital marketing, and creative & branding services to businesses internationally.`,
+    `${site.name} (established ${site.foundingYear}) is a full-service digital agency and software house offering web development, mobile app development, custom software and AI, digital marketing, and creative & branding services to businesses internationally.`,
     "",
     "## Company",
     `- [About ${site.name}](${absoluteUrl("/about-us")}): who we are, how we work and what we believe`,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Check, Loader2, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -205,9 +206,9 @@ export default function ContactForm({
             <div className="flex flex-col items-start gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
               <p id="form-note" className="text-xs text-muted">
                 By sending this form you agree to our{" "}
-                <a href="/privacy-policy" className="underline underline-offset-2">
+                <Link href="/privacy-policy" className="underline underline-offset-2">
                   privacy policy
-                </a>
+                </Link>
                 .
               </p>
               <button

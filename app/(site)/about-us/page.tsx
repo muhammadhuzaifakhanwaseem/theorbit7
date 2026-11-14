@@ -13,11 +13,16 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
-const title = "About The Orbit 7 | Full-Service Digital Agency & Software House";
+const title = "About The Orbit 7 | Digital Agency & Software Company";
 const description =
-  "Meet The Orbit 7 — a digital agency and software house uniting strategy, design, engineering and marketing. Learn how we work, what we value and the industries we serve.";
+  "About The Orbit 7: company profile of a digital agency and software development company, established in 2016, uniting strategy, design, engineering and growth.";
 
-export const metadata = buildMetadata({ title, description, path: "/about-us" });
+export const metadata = buildMetadata({
+  title,
+  description,
+  path: "/about-us",
+  keywords: ["about The Orbit 7", "software development company", "digital agency", "company profile"],
+});
 
 const engagement = [
   {
@@ -44,8 +49,8 @@ export default function AboutPage() {
       <JsonLd data={[webPageSchema({ name: title, path: "/about-us", description, type: "AboutPage" }), breadcrumbSchema(crumbs)]} />
       <PageHero
         eyebrow="About us"
-        title="Strategy, design, engineering and growth — *in one orbit.*"
-        lead={`${site.name} is a full-service digital agency and software house. We help ambitious businesses plan, build and grow their digital presence — from the first website to complex software and always-on marketing.`}
+        title="About The Orbit 7: everything digital, *in one orbit.*"
+        lead={`Established in ${site.foundingYear}, ${site.name} is a full-service digital agency and software development company. We help ambitious businesses plan, build and grow their digital presence — from the first website to complex software and always-on marketing.`}
         crumbs={crumbs}
       />
 

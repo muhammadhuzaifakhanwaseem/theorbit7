@@ -11,11 +11,16 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { absoluteUrl } from "@/lib/site";
 
-const title = "Locations We Serve | UAE, USA, UK & Asia | The Orbit 7";
+const title = "Digital Agency Locations We Serve | The Orbit 7";
 const description =
-  "The Orbit 7 works with businesses in Dubai, Abu Dhabi, Sharjah, Ajman, San Francisco, New York, Austin, Los Angeles, Chicago, Toronto, London and Singapore — remotely, as one team.";
+  "The Orbit 7 digital agency locations: software development and IT services worldwide for businesses in Dubai, Abu Dhabi, the USA, Toronto, London and Singapore.";
 
-export const metadata = buildMetadata({ title, description, path: "/locations" });
+export const metadata = buildMetadata({
+  title,
+  description,
+  path: "/locations",
+  keywords: ["digital agency locations", "software development company locations", "IT services worldwide"],
+});
 
 export default function LocationsPage() {
   const crumbs = [
@@ -38,8 +43,8 @@ export default function LocationsPage() {
       />
       <PageHero
         eyebrow="Locations"
-        title="One team, serving businesses *worldwide.*"
-        lead="We partner with companies across the UAE, North America, the UK and Asia — remotely, with structured communication, scheduled calls in your time zone and the same delivery process everywhere."
+        title="Digital agency locations, *one global team.*"
+        lead="A software development company serving clients across the UAE, North America, the UK and Asia. We deliver IT services worldwide, remotely, with structured communication, calls in your time zone and the same process everywhere."
         crumbs={crumbs}
       >
         <BookCallButton size="lg">Book a free consultation</BookCallButton>

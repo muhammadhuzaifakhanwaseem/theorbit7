@@ -264,7 +264,7 @@ export default function Header() {
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
       <div
         className={cn(
-          "relative mx-auto flex h-16 max-w-site items-center justify-between rounded-full pl-5 pr-2.5 transition-all duration-500 ease-premium sm:pl-6",
+          "relative mx-auto flex h-16 w-full max-w-site min-w-0 items-center justify-between rounded-full pl-5 pr-2.5 transition-all duration-500 ease-premium sm:pl-6",
           scrolled || menu ? "glass !bg-white/85" : "border border-transparent bg-transparent",
         )}
         onMouseLeave={scheduleClose}
@@ -311,7 +311,7 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-2">
           <a
             href={telHref(site.phones[0])}
             className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-ink-2 transition-colors hover:text-brand 2xl:flex"

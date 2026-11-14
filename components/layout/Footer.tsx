@@ -137,7 +137,7 @@ export default function Footer() {
               Let&apos;s build something remarkable <ArrowUpRight className="size-4" />
             </Link>
             <p className="text-white/50">
-              © {year} {site.name}. All rights reserved.
+              © {site.foundingYear}–{year} {site.name}. All rights reserved.
             </p>
           </div>
         </div>

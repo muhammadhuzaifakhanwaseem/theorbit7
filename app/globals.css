@@ -78,6 +78,19 @@
   border-color: var(--line);
 }
 
+/* Mobile hardening: nothing may widen the page sideways (which would push the
+   menu button off-screen), and long headline words wrap instead of clipping. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;

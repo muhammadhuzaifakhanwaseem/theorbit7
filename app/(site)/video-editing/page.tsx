@@ -18,13 +18,13 @@ import { absoluteUrl, site } from "@/lib/site";
 
 const title = "Video Editing Services | Podcast, YouTube & Reels | The Orbit 7";
 const description =
-  "Professional video editing for podcasters, creators, brands and agencies: podcast and YouTube editing, Shorts, Reels and TikToks, corporate and ad videos, motion graphics and audio post-production.";
+  "Professional video editing services from a video editing company for creators and brands: business video editing for podcasts, YouTube, Reels, ads and more.";
 
 export const metadata = buildMetadata({
   title,
   description,
   path: "/video-editing",
-  keywords: ["video editing services", "podcast video editing", "youtube video editing", "short form video editing", "white label video editing"],
+  keywords: ["video editing services", "professional video editing", "business video editing", "video editing company", "podcast video editing", "youtube video editing"],
 });
 
 const steps = [
@@ -89,7 +89,7 @@ export default function VideoEditingPage() {
                 <Eyebrow>Video Editing</Eyebrow>
               </div>
               <h1 id="page-title" className="mt-5 text-[2.6rem] leading-[1.0] font-semibold tracking-[-0.035em] sm:text-6xl lg:text-[4.4rem]">
-                <SplitWords text="Video editing that keeps viewers *watching.*" />
+                <SplitWords text="Video editing services that keep viewers *watching.*" />
               </h1>
               <p className="fade-late mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl" style={{ ["--delay" as string]: "0.5s" }}>
                 Podcasts, YouTube, Shorts, Reels, TikToks, corporate and ad videos — edited for retention, in any language, for

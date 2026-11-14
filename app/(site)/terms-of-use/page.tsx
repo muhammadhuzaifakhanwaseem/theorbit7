@@ -3,10 +3,11 @@ import { buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "Terms of Use | The Orbit 7",
+  title: "Terms of Use | Website Terms & Conditions | The Orbit 7",
   description:
-    "The terms that govern your use of theorbit7.com, including intellectual property, the relationship to signed service agreements and limitations of liability.",
+    "The Orbit 7 terms of use: website terms and conditions for theorbit7.com, how they relate to our service terms, intellectual property and limits of liability.",
   path: "/terms-of-use",
+  keywords: ["terms of use", "website terms and conditions", "service terms"],
 });
 
 export default function TermsPage() {

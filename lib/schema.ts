@@ -13,6 +13,7 @@ export function organizationSchema() {
     url: site.url,
     logo: absoluteUrl("/brand/the-orbit-7-icon.png"),
     description: site.description,
+    foundingDate: String(site.foundingYear),
     email: site.email,
     ...(site.phone ? { telephone: site.phone } : {}),
     sameAs: site.social.map((s) => s.href),

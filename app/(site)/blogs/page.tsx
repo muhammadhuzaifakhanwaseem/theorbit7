@@ -18,9 +18,9 @@ import { cn } from "@/lib/utils";
 type SP = Record<string, string | string[] | undefined>;
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v)?.trim() ?? "";
 
-const BASE_TITLE = "Blog — Insights on Web, Apps, AI & Digital Marketing | The Orbit 7";
+const BASE_TITLE = "Technology & Digital Marketing Blog | The Orbit 7";
 const BASE_DESC =
-  "Practical guides and insights from The Orbit 7 on website development, mobile apps, custom software, AI automation, SEO and digital marketing.";
+  "The Orbit 7 technology and digital marketing blog: software development guides, SEO tips, AI technology articles and practical advice for growing online.";
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<SP> }): Promise<Metadata> {
   const sp = await searchParams;
@@ -42,6 +42,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     description: category ? `Articles about ${catName.toLowerCase()} from The Orbit 7: practical guides, insights and best practices.` : BASE_DESC,
     path,
     noindex: !!q,
+    ...(category ? {} : { keywords: ["technology and digital marketing blog", "software development blog", "SEO tips", "AI technology articles"] }),
   });
 }
 
@@ -105,7 +106,7 @@ export default async function BlogsPage({ searchParams }: { searchParams: Promis
                 <Eyebrow>The Orbit 7 Blog</Eyebrow>
               </div>
               <h1 id="page-title" className="mt-5 text-[2.6rem] leading-[1.0] font-semibold tracking-[-0.035em] sm:text-6xl lg:text-7xl">
-                <SplitWords text={data.activeCategory ? `${data.activeCategory.name} *insights*` : "Insights that help you *grow online.*"} />
+                <SplitWords text={data.activeCategory ? `${data.activeCategory.name} *insights*` : "The technology & digital marketing *blog.*"} />
               </h1>
               <p className="fade-late mt-6 max-w-2xl text-lg leading-relaxed text-muted" style={{ ["--delay" as string]: "0.5s" }}>
                 {data.activeCategory?.description ||

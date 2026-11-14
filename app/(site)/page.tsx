@@ -24,9 +24,9 @@ import { buildMetadata } from "@/lib/seo";
 import { faqSchema, professionalServiceSchema, webPageSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
-const title = "The Orbit 7 | Digital Agency & Software House";
+const title = "The Orbit 7 | Digital Agency & Software Development Company";
 const description =
-  "Build and scale your business with The Orbit 7. We engineer high-performance websites, mobile apps, custom software, AI automation, and ROI-driven marketing.";
+  "The Orbit 7 is a digital agency and software development company. We build websites, apps, custom software and AI, then grow them with SEO and marketing.";
 
 /** Re-rendered at most every 5 minutes (and immediately on publish) so the latest blog posts stay current. */
 export const revalidate = 300;
@@ -36,12 +36,12 @@ export const metadata = buildMetadata({
   description,
   path: "/",
   keywords: [
+    "The Orbit 7",
     "digital agency",
+    "software development company",
+    "digital solutions company",
     "software house",
     "website development company",
-    "mobile app development",
-    "seo agency",
-    "ai automation agency",
   ],
 });
 
@@ -104,7 +104,7 @@ export default function HomePage() {
           <div>
             <SectionHeading
               light
-              eyebrow="About The Orbit 7"
+              eyebrow={`About The Orbit 7 · Since ${site.foundingYear}`}
               title={
                 <span id="about-heading">
                   A digital agency with the <em>engineering depth</em> of a software house.

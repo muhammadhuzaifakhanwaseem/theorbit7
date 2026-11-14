@@ -11,11 +11,16 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { absoluteUrl, site } from "@/lib/site";
 
-const title = "Life at The Orbit 7 | Careers, Culture & Open Roles";
+const title = "Life at The Orbit 7 | Company Culture & Careers";
 const description =
-  "Discover life at The Orbit 7: our culture, values and how we work — and explore careers in design, engineering, AI, SEO, marketing and video editing.";
+  "Life at The Orbit 7: our company culture, work environment and team culture, how we work together, and careers in design, engineering, AI, marketing and video.";
 
-export const metadata = buildMetadata({ title, description, path: "/life-at-the-orbit-7" });
+export const metadata = buildMetadata({
+  title,
+  description,
+  path: "/life-at-the-orbit-7",
+  keywords: ["life at The Orbit 7", "company culture", "work environment", "team culture"],
+});
 
 export default function LifePage() {
   const crumbs = [
@@ -44,8 +49,8 @@ export default function LifePage() {
       />
       <PageHero
         eyebrow="Life at The Orbit 7"
-        title="Do the best work of your *career.*"
-        lead="We're a team of designers, engineers, strategists, marketers and editors who care about craft and outcomes. Here's what it's like to work with us."
+        title="Life at The Orbit 7: do the best work of your *career.*"
+        lead="Our team culture is built by designers, engineers, strategists, marketers and editors who care about craft and outcomes. Here's what our work environment is really like."
         crumbs={crumbs}
       >
         <Button href="#roles" size="lg">

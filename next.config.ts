@@ -40,7 +40,29 @@ const legacyServiceMap: Record<string, string> = {
   "interactive-prototyping": "ui-ux-design",
 };
 
+/**
+ * Content-Security-Policy. Allows only the third parties the site actually uses:
+ * Google Analytics 4 + Tag Manager, Microsoft Clarity, and the Cal.com booking iframe.
+ * 'unsafe-inline' scripts are required by Next.js's inline bootstrap on statically
+ * rendered pages (nonces would force every page to render dynamically).
+ */
+const isDev = process.env.NODE_ENV !== "production";
+const csp = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.clarity.ms https://vercel.live`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.clarity.ms https://c.bing.com https://vercel.live wss://ws-us3.pusher.com",
+  "frame-src 'self' https://cal.com https://app.cal.com https://vercel.live",
+  "frame-ancestors 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+].join("; ");
+
 const nextConfig: NextConfig = {
+  experimental: { globalNotFound: true },
   poweredByHeader: false,
   images: { formats: ["image/avif", "image/webp"], qualities: [70, 75, 85] },
   async redirects() {
@@ -71,6 +93,7 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "Content-Security-Policy", value: csp },
         ],
       },
     ];

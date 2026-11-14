@@ -5,8 +5,9 @@ import { site } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Privacy Policy | The Orbit 7",
   description:
-    "Read The Orbit 7 privacy policy: what information we collect through theorbit7.com and our contact forms, how we use it, how long we keep it and your rights.",
+    "The Orbit 7 privacy policy and data protection policy: what we collect through theorbit7.com and our forms, how we use it, how long we keep it and your rights.",
   path: "/privacy-policy",
+  keywords: ["privacy policy", "The Orbit 7 privacy policy", "data protection policy"],
 });
 
 export default function PrivacyPolicyPage() {

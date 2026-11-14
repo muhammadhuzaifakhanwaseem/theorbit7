@@ -6,6 +6,8 @@
 export const site = {
   name: "The Orbit 7",
   legalName: "The Orbit 7",
+  /** Year the company was established. */
+  foundingYear: 2016,
   url: "https://theorbit7.com",
   tagline: "Digital agency & software house",
   description:

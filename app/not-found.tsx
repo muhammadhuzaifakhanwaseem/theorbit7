@@ -1,36 +1,12 @@
-import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
-import Eyebrow from "@/components/ui/Eyebrow";
-import SiteChrome from "@/components/layout/SiteChrome";
+import NotFoundContent from "@/components/layout/NotFoundContent";
 
 export const metadata = { title: { absolute: "Page not found | The Orbit 7" }, robots: { index: false } };
 
+/**
+ * Root fallback (e.g. unknown /admin URLs). Kept free of the site header/footer on purpose:
+ * Next.js embeds this boundary in every page's payload, so a heavy version bloats all pages.
+ * URLs that match no route get the full branded 404 from app/global-not-found.tsx.
+ */
 export default function NotFound() {
-  return (
-    <SiteChrome>
-    <section className="relative isolate flex min-h-[80vh] items-center overflow-hidden pt-32 pb-20">
-      <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <div className="bg-grid mask-radial absolute inset-0 opacity-60" />
-        <div className="absolute left-1/2 top-1/2 size-[34rem] -translate-x-1/2 -translate-y-1/2 animate-spin-slower rounded-full border border-dashed border-brand/20">
-          <span className="absolute -top-2 left-1/2 size-4 rounded-full bg-brand-500" />
-        </div>
-      </div>
-      <Container className="text-center">
-        <Eyebrow className="justify-center">Error 404</Eyebrow>
-        <h1 className="mt-5 text-5xl font-semibold sm:text-7xl">
-          Lost in <em>orbit.</em>
-        </h1>
-        <p className="mx-auto mt-6 max-w-md text-lg text-muted">
-          The page you are looking for has moved or no longer exists. Let&apos;s get you back on course.
-        </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <Button href="/">Back to home</Button>
-          <Button href="/services" variant="secondary">
-            Explore services
-          </Button>
-        </div>
-      </Container>
-    </section>
-    </SiteChrome>
-  );
+  return <NotFoundContent />;
 }

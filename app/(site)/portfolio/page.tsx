@@ -9,11 +9,16 @@ import { getService } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
-const title = "Our Work | Websites, Apps & Software Projects | The Orbit 7";
+const title = "Software Development Portfolio | The Orbit 7";
 const description =
-  "Explore the kinds of websites, ecommerce platforms, mobile apps, ERP systems, AI solutions and growth campaigns The Orbit 7 designs, builds and grows for clients.";
+  "The Orbit 7 software development portfolio: web development projects, a mobile app portfolio and digital projects in ecommerce, healthcare, ERP, AI and SaaS.";
 
-export const metadata = buildMetadata({ title, description, path: "/portfolio" });
+export const metadata = buildMetadata({
+  title,
+  description,
+  path: "/portfolio",
+  keywords: ["software development portfolio", "web development projects", "mobile app portfolio", "digital projects"],
+});
 
 const groupOf = (type: string) =>
   /app/i.test(type) ? "Mobile" : /AI|Automation/i.test(type) ? "AI & Automation" : /ERP|SaaS/i.test(type) ? "Software" : /Brand/i.test(type) ? "Creative" : "Web & Marketing";
@@ -34,8 +39,8 @@ export default function PortfolioPage() {
       />
       <PageHero
         eyebrow="Our work"
-        title="Digital products built to *perform.*"
-        lead="A look at the platforms, apps, automations and campaigns we design, build and grow — spanning ecommerce, healthcare, logistics, SaaS, real estate and hospitality. Ask us for detailed case studies relevant to your project."
+        title="A software development portfolio built to *perform.*"
+        lead="Web development projects, mobile apps, automations and campaigns we design, build and grow — spanning ecommerce, healthcare, logistics, SaaS, real estate and hospitality. Ask us for detailed case studies relevant to your project."
         crumbs={crumbs}
       />
       <section className="border-t border-line py-16 sm:py-24" aria-label="Projects">

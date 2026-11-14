@@ -12,10 +12,14 @@ import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { companyPageReady } from "@/lib/company";
 import { site } from "@/lib/site";
 
-const title = "Leadership & Team | The Orbit 7";
-const description = "Meet the people who lead The Orbit 7 — the strategists, designers, engineers and marketers responsible for our clients' results.";
+const title = "Leadership Team | Company Leadership | The Orbit 7";
+const description =
+  "Meet the company leadership team at The Orbit 7, led by CEO Muhammad Naveed: the management team responsible for strategy, delivery and our clients' results.";
 
-export const metadata = buildMetadata({ title, description, path: "/leadership", noindex: !companyPageReady["/leadership"] });
+export const metadata = buildMetadata({ title, description, path: "/leadership",
+  noindex: !companyPageReady["/leadership"],
+  keywords: ["company leadership team", "leadership team", "management team", "The Orbit 7 CEO"],
+});
 
 export default function LeadershipPage() {
   const crumbs = [
@@ -43,7 +47,7 @@ export default function LeadershipPage() {
             : []),
         ]}
       />
-      <PageHero eyebrow="Leadership" title="The people *behind the work.*" lead="A senior, hands-on team that stays close to every engagement — from first workshop to launch and growth." crumbs={crumbs} />
+      <PageHero eyebrow="Leadership" title="The leadership team *behind the work.*" lead="Our management team stays close to every engagement, from the first workshop to launch and growth." crumbs={crumbs} />
       <section className="border-t border-line py-20 sm:py-28" aria-labelledby="team-heading">
         <Container>
           <SectionHeading eyebrow="Our team" title={<span id="team-heading">Leadership <em>team</em></span>} />

@@ -14,11 +14,16 @@ import { bookingEmbedUrl, hasBooking } from "@/lib/booking";
 import BookingInline from "@/components/booking/BookingInline";
 import { socialIconFor } from "@/components/ui/SocialIcons";
 
-const title = "Contact The Orbit 7 | Book a Free Consultation | Call or WhatsApp";
+const title = "Contact The Orbit 7 | Free Software Development Consultation";
 const description =
-  "Contact The Orbit 7 to discuss your website, app, software, AI or marketing project. Tell us your goals and get a free consultation and a clear, no-obligation proposal.";
+  "Contact The Orbit 7 for a free software development consultation. Hire a development company for your website, app or AI project and send a project inquiry.";
 
-export const metadata = buildMetadata({ title, description, path: "/contact-us" });
+export const metadata = buildMetadata({
+  title,
+  description,
+  path: "/contact-us",
+  keywords: ["contact The Orbit 7", "software development consultation", "hire development company", "project inquiry"],
+});
 
 const steps = [
   { t: "We reply", d: "A specialist reviews your enquiry and responds by email." },
@@ -66,7 +71,7 @@ export default function ContactPage() {
                 <Eyebrow>Contact us</Eyebrow>
               </div>
               <h1 id="page-title" className="mt-5 text-[2.6rem] leading-[1.0] font-semibold tracking-[-0.035em] sm:text-6xl">
-                <SplitWords text="Let's build something *remarkable.*" />
+                <SplitWords text="Contact The Orbit 7 and let's build something *remarkable.*" />
               </h1>
               <p className="fade-late mt-6 max-w-lg text-lg leading-relaxed text-muted" style={{ ["--delay" as string]: "0.5s" }}>
                 Tell us about your project — a new website, an app, custom software, AI automation or a growth
