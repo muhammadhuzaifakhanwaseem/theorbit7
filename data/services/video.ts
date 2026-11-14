@@ -1,4 +1,8 @@
 import type { Service } from "./types";
+import { site } from "@/lib/site";
+
+/** Years since The Orbit 7 was established, so the badge stays current. */
+const yearsInBusiness = new Date().getFullYear() - site.foundingYear;
 
 /** Tools shared by the video editing pages (from the podcast content brief). */
 const editingTools = [
@@ -52,7 +56,7 @@ export const videoServices: Service[] = [
     heroLead:
       "Multicam editing, studio-clean audio and scroll-stopping Shorts and Reels, in any language, for podcasters worldwide. You record, we handle everything else.",
     primaryCta: "Get a free sample edit",
-    trust: ["5+ years experience", "Multilingual", "Clients worldwide", "Fast turnaround", "Revisions until you're 100% happy"],
+    trust: [`${yearsInBusiness}+ years experience`, "Multilingual", "Clients worldwide", "Fast turnaround", "Revisions until you're 100% happy"],
     stats: [
       { value: "5+", label: "Years of editing experience" },
       { value: "48–72 hr", label: "Typical turnaround" },
